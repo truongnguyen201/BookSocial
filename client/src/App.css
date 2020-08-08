@@ -1,0 +1,324 @@
+.App {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Poppins, sans-serif;
+}
+
+.HomePage {
+  background-color: #f4f7f8;
+  z-index: 0;
+  margin-top: 55px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+}
+
+/* Nav-bar css */
+
+.Nav-bar {
+  display: flex;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 55px;
+  box-shadow: -1px 4px 6px 1px rgba(185, 185, 185, 0.16);
+  z-index: 3;
+  background-color: white;
+}
+
+.Nav-bar .Home {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  user-select: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.Nav-bar .Home:hover {
+  background-color: #dedede;
+}
+
+.Nav-bar .Notification {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  user-select: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: #302579;
+  margin-right: 10px;
+}
+.Nav-bar .Notification:hover {
+  background-color: #dedede;
+}
+
+.Nav-bar .Search-bar {
+  width: 45%;
+  margin-right: 20px;
+}
+
+.Nav-bar .Search-bar > input {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #d6d6d6;
+  border-radius: 10px;
+  padding: 5px 10px;
+  outline: none;
+  height: 50%;
+}
+.Nav-bar .Profile {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Nav-bar .Profile .AvatarIcon {
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 5px;
+  position: relative;
+}
+
+.Nav-bar .Profile .AvatarIcon:hover {
+  background-color: #dedede;
+}
+
+.Nav-bar .Profile .dropdown-content {
+  position: absolute;
+  text-align: center;
+  display: none;
+  background-color: white;
+  min-width: 100px;
+  border-radius: 5px;
+  overflow: auto;
+  top: 45px;
+  margin-left: 50px;
+  z-index: 5;
+  box-shadow: 0px 4px 6px 3px rgba(185, 185, 185, 0.2);
+  flex-direction: column;
+  user-select: none;
+}
+
+.Nav-bar .Profile .show {
+  display: block;
+}
+
+.Nav-bar .Profile .dropdown-content > div {
+  width: 100%;
+  padding: 5px 10px;
+}
+
+.Nav-bar .Profile .dropdown-content > div:hover {
+  background-color: #dedede;
+}
+
+/* Nav-bar css */
+
+/* .ProfilePage */
+
+.ProfilePage {
+  z-index: 0;
+  margin-top: 55px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background-color: #f4f7f8;
+}
+
+.ProfileMainPage {
+  margin-top: 10px;
+  width: 70%;
+  display: grid;
+  grid-template-columns: 70% 30%;
+}
+
+.ProfileMainPage .HeaderTitle {
+  margin-top: 20px;
+  font-weight: bold;
+  color: #4f4f4f;
+}
+
+.ProfileMainPage .Posts {
+  z-index: 0;
+  width: 95%;
+}
+
+.ProfileMainPage .Posts .Post {
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.ProfileMainPage .Posts .Loading {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ProfileMainPage .ProfilePageNavBar {
+  background-color: white;
+  width: 95%;
+
+  margin-top: 40px;
+  height: 40px;
+  border-radius: 10px;
+  padding: 0px 30px;
+}
+
+.ProfileMainPage .ProfilePageNavBar > ul {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  flex-direction: row;
+  padding: 0;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 0;
+}
+.ProfileMainPage .ProfilePageNavBar ul > a > li {
+  flex: 1;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  color: #302579;
+}
+
+.ProfileMainPage .ProfilePageNavBar ul > a {
+  text-decoration: none;
+}
+
+.ProfileMainPage .ProfilePageNavBar ul > a > li:hover {
+  background-color: #dedede;
+}
+
+.ProfileMainPage .ProfilePageNavBar ul > a > li > .bar {
+  width: 100%;
+  background-color: #302579;
+  height: 3px;
+  position: absolute;
+  bottom: 0;
+}
+
+.MainInfo {
+  background-color: white;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  height: 100px;
+  border-radius: 10px;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.DetailInfo {
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  height: 400px;
+  max-height: 500px;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.MainInfo .Avatar {
+  height: 140px;
+  width: 140px;
+  background-color: white;
+  position: absolute;
+  border-radius: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -20px;
+  left: -15px;
+}
+
+.MainInfo .Avatar > img {
+  padding: 5px;
+  width: 135px;
+  height: 135px;
+}
+
+.MainInfo .UserName {
+  padding-left: 120px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* ProfilePage */
+
+/* News */
+.News {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.News .Posts {
+  z-index: 0;
+  margin-top: 5px;
+  width: 67%;
+}
+
+.News .UserPost {
+  width: 67%;
+}
+
+.News .UserPost .MainUserPost {
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  height: 70px;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.News .Posts .Post {
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.News .Posts .Loading {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .News */

@@ -1,0 +1,200 @@
+.signin-signup-container {
+  display: flex;
+  height: 80vh;
+  width: 60%;
+  border-radius: 1%;
+  margin-left: 20%;
+  margin-top: 10vh;
+  box-shadow: 2px 2px 40px 0px rgba(0, 0, 0, 0.3);
+}
+
+.left-container {
+  width: 50%;
+  position: relative;
+}
+
+.left-container > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 1% 0px 0px 1%;
+}
+
+.right-container {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: center;
+}
+
+.right-container > h1 {
+  font-weight: bold;
+  margin-top: 50px;
+  font-family: "Caveat", cursive;
+}
+
+.login-form {
+  width: 70%;
+}
+
+.sign-up {
+  width: 90%;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #d3d3d3;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 6px;
+  padding-right: 8px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.input-field > img {
+  padding-right: 4px;
+  height: 20px;
+  cursor: pointer;
+}
+.input-field .error {
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+}
+
+.input-field .error .error-message {
+  display: none;
+  position: absolute;
+  z-index: 4;
+  background-color: #be4b49;
+  border-radius: 5px;
+  left: 79%;
+  padding: 8px;
+  color: white;
+  font-size: 13px;
+  margin-top: -35px;
+}
+
+.input-field .error > img:hover ~ .error-message {
+  display: block;
+}
+
+.input-field > input {
+  width: 80%;
+  border: none;
+  padding: 5px 5px 5px 10px;
+  outline: none;
+  border-left: 1px solid #d3d3dd;
+  border-radius: 5px;
+}
+
+.input-field > .hide-and-show {
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 400;
+  user-select: none;
+}
+
+.button-group-field {
+  display: flex;
+  margin-top: 15px;
+  justify-content: space-between;
+}
+
+.button-group-field > input {
+  margin-top: 13px;
+  cursor: pointer;
+}
+
+.button-group-field > div {
+  font-size: 13px;
+  align-items: center;
+  display: flex;
+  color: #b8b5b4;
+  margin-right: 100px;
+}
+
+.button-group-field-signup {
+  display: flex;
+  margin-top: 15px;
+  justify-content: space-between;
+}
+
+.button-group-field-signup > div {
+  font-size: 15px;
+  color: #8f8c8b;
+  align-items: center;
+  display: flex;
+  user-select: none;
+}
+
+.button-group-field-signup > div > span {
+  color: #2d88ff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.signup-retake {
+  display: flex;
+  font-size: 14px;
+  margin-top: 15px;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.signup-retake .Register:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.signup-retake .Retake:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.horizontal-line {
+  width: 50%;
+  text-align: center;
+  border-bottom: 1px solid #d6d6d6;
+  line-height: 0.3em;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.OAuth {
+  display: flex;
+  flex-direction: column;
+}
+
+.OAuth-facebook {
+  background-color: #2d88ff;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.OAuth-gmail {
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #d93025;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.Terms-and-Policy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 70px;
+  margin-top: 30px;
+  text-align: center;
+  font-size: 14px;
+  color: #8f8c8b;
+  user-select: none;
+}
