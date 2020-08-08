@@ -1,10 +1,10 @@
-import React, { Fragment } from "react";
+import React from "react";
 import NavBar from "../NavBar/NavBar";
 import Posts from "../components/News/Posts";
 import MainInfo from "./ProfileInfo/MainInfo";
 import DetailInfo from "./ProfileInfo/DetailInfo";
 import ProfilePageNavBar from "./ProfileInfo/ProfilePageNavBar";
-import { Route, Switch, useRouteMatch, useParams } from "react-router-dom";
+import { Route, useRouteMatch, useParams } from "react-router-dom";
 import ProfilePost from "./ProfileDetail/ProfilePost";
 import ProfileFollowers from "./ProfileDetail/ProfileFollowers";
 import ProfileFollowing from "./ProfileDetail/ProfileFollowing";

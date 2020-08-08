@@ -1,10 +1,14 @@
 import React from "react";
+import boxmail from "../../img/boxmail.png";
 
 const ProfileFollowers = () => {
   return (
     <div className="ProfileFollowers">
       <div className="HeaderTitle">Followers</div>
-      ProfileFollowers
+      <div className="ProfileDetailContent">
+        <img src={boxmail} height="150px" width="150px"></img>
+        <span>You don't have followers yet</span>
+      </div>
     </div>
   );
 };

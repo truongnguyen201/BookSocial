@@ -1,4 +1,5 @@
 const express = require("express");
+const chalk = require("chalk");
 const app = express();
 const port = 4000;
 const schema = require("./schema/schema.js");
@@ -29,7 +30,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("Connected to user db");
+    console.log(chalk.blueBright("Connected to user db"));
   })
   .catch((err) => {
     console.log("DB Connection Error: " + `${err.message}`);
@@ -48,5 +49,7 @@ app.use(
 app.get("/", (req, res) => res.send("Hello World!"));
 
 app.listen(port, () =>
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(
+    chalk.blueBright(`Example app listening at http://localhost:${port}`)
+  )
 );

@@ -42,16 +42,7 @@ const NavBar = () => {
         <img src={Logo} alt="Logo" height="50px" width="auto"></img>
       </div>
       <div className="Home">
-        <Link
-          to={{
-            pathname: "/",
-            key: Math.random(),
-            state: {
-              applied: true,
-            },
-          }}
-          style={{ textDecoration: "none", color: "#302579" }}
-        >
+        <Link to="/" style={{ textDecoration: "none", color: "#302579" }}>
           Home
         </Link>
       </div>
@@ -71,8 +62,6 @@ const NavBar = () => {
             >
               Profile
             </Link>
-          </div>
-          <div>
             <Link
               to="/login"
               style={{ textDecoration: "none" }}

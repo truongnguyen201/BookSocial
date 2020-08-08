@@ -16,7 +16,9 @@ const ProfilePageNavBar = () => {
         {navbardetail.map((detail, index) => (
           <Link key={index} to={`/profile/${username}/${detail.linkparams}`}>
             <li>
-              <span>{detail.title}</span>
+              <span>
+                {detail.title !== "Profile" && "0"} {detail.title}
+              </span>
               {profiledetail === detail.linkparams && (
                 <div className="bar"></div>
               )}
