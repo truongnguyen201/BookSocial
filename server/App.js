@@ -2,7 +2,7 @@ const express = require("express");
 const chalk = require("chalk");
 const app = express();
 const port = 4000;
-const schema = require("./schema/schema.js");
+const schema = require("./graphql/schema");
 const BodyParser = require("body-parser");
 const dotenv = require("dotenv");
 dotenv.config();

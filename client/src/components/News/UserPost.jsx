@@ -16,6 +16,8 @@ const UserPost = () => {
     Booktitle: "",
     genreID: "5f07eea4f2622d7e4f0ecdab",
     authorID: "5f07ee03f2622d7e4f0ecdaa",
+    userCreator: localStorage.getItem("username"),
+    userID: localStorage.getItem("id"),
   });
 
   const addPost = (e) => {
@@ -28,6 +30,8 @@ const UserPost = () => {
         genreID: newPost.genreID,
         authorID: newPost.authorID,
         Booktitle: newPost.Booktitle,
+        userCreator: newPost.userCreator,
+        userID: newPost.userID,
       },
       refetchQueries: [{ query: getPostsDetail }],
     });
@@ -48,7 +52,7 @@ const UserPost = () => {
             <img src={AvatarIcon} alt="icon" height="30px" width="30px"></img>
           </div>
           <div className="UserName" style={{ marginLeft: "20px" }}>
-            Truong Nguyen
+            {localStorage.getItem("username")}
           </div>
         </div>
         <div
@@ -74,6 +78,8 @@ const UserPost = () => {
                     genreID: newPost.genreID,
                     authorID: newPost.authorID,
                     Booktitle: e.target.value,
+                    userCreator: newPost.userCreator,
+                    userID: newPost.userID,
                   })
                 }
               />
@@ -101,6 +107,8 @@ const UserPost = () => {
                     genreID: newPost.genreID,
                     authorID: newPost.authorID,
                     Booktitle: newPost.Booktitle,
+                    userCreator: newPost.userCreator,
+                    userID: newPost.userID,
                   })
                 }
               ></input>
@@ -115,6 +123,8 @@ const UserPost = () => {
                     genreID: newPost.genreID,
                     authorID: newPost.authorID,
                     Booktitle: newPost.Booktitle,
+                    userCreator: newPost.userCreator,
+                    userID: newPost.userID,
                   })
                 }
               ></input>

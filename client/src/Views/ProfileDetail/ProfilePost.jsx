@@ -6,7 +6,7 @@ const ProfilePost = () => {
     <div className="ProfilePost">
       <div className="HeaderTitle">Posts</div>
       <div className="ProfileDetailContent">
-        <img src={boxmail} height="150px" width="150px"></img>
+        <img src={boxmail} height="150px" width="150px" alt="boxmailicon"></img>
         <span>You haven't posted any content yet.</span>
       </div>
     </div>

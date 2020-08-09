@@ -6,7 +6,7 @@ const ProfileFollowers = () => {
     <div className="ProfileFollowers">
       <div className="HeaderTitle">Followers</div>
       <div className="ProfileDetailContent">
-        <img src={boxmail} height="150px" width="150px"></img>
+        <img src={boxmail} height="150px" width="150px" alt="boxmailicon"></img>
         <span>You don't have followers yet</span>
       </div>
     </div>

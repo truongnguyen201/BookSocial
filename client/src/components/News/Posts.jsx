@@ -23,6 +23,9 @@ const Posts = () => {
             Recommendation={post.Recommendation}
             genre={post.genre.GenreTitle}
             Booktitle={post.Booktitle}
+            UserCreator={post.userCreator}
+            UserID={post.user._id}
+            DateCreate={post.date}
           ></Post>
         </div>
       ))}

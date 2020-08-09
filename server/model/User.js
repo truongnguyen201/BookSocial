@@ -1,0 +1,14 @@
+const mongoose = require("mongoose");
+const schema = mongoose.Schema;
+
+const UserSchema = new schema({
+  id: { type: String },
+  username: { type: String },
+  fullname: { type: String },
+  followers: { type: Number },
+  following: { type: Number },
+  followersID: [{ type: String }],
+  followingID: [{ type: String }],
+});
+
+module.exports = mongoose.model("Users", UserSchema);

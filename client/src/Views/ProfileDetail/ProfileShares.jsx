@@ -6,7 +6,7 @@ const ProfileShares = () => {
     <div className="ProfileShares">
       <div className="HeaderTitle">Shares</div>
       <div className="ProfileDetailContent">
-        <img src={boxmail} height="150px" width="150px"></img>
+        <img src={boxmail} height="150px" width="150px" alt="boxmailicon"></img>
         <span>You haven't shared anything yet</span>
       </div>
     </div>

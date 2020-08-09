@@ -31,7 +31,7 @@ const SignIn = () => {
         validationSchema={SignInSchema}
         initialValues={{
           email: "truong12345@gmail.com",
-          password: "Truongnx1234",
+          password: "Truong1234",
         }}
         onSubmit={(values) => {
           SignIn({
@@ -43,9 +43,11 @@ const SignIn = () => {
             .then((res) => {
               var token = res.data.login.token;
               var username = res.data.login.username;
-              console.log(username);
+              var _id = res.data.login._id;
+              console.log(_id);
               localStorage.setItem("username", username);
               localStorage.setItem("token", token);
+              localStorage.setItem("id", _id);
               dispatch(login());
               history.push("/");
               setIsLoaded(false);

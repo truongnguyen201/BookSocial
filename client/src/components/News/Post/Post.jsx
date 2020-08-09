@@ -4,10 +4,23 @@ import TopPost from "./TopPost";
 import MiddlePost from "./MiddlePost";
 
 const Post = (props) => {
-  let { author, Review, Recommendation, genre, Booktitle } = props;
+  let {
+    author,
+    Review,
+    Recommendation,
+    genre,
+    Booktitle,
+    UserCreator,
+    UserID,
+    DateCreate,
+  } = props;
   return (
     <div className="Post">
-      <TopPost></TopPost>
+      <TopPost
+        DateCreate={DateCreate}
+        UserCreator={UserCreator}
+        UserID={UserID}
+      ></TopPost>
       <MiddlePost
         author={author}
         Review={Review}

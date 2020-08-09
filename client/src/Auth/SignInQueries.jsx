@@ -5,6 +5,7 @@ const SignInQueries = gql`
     login(email: $email, password: $password) {
       username
       token
+      _id
     }
   }
 `;

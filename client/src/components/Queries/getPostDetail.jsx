@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 const getPostsDetail = gql`
   {
     posts {
-      id
+      _id
       Booktitle
       Review
       Recommendation
@@ -13,6 +13,11 @@ const getPostsDetail = gql`
       author {
         name
       }
+      user {
+        _id
+      }
+      userCreator
+      date
     }
   }
 `;

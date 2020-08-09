@@ -5,7 +5,7 @@ const authSchema = new schema({
   email: String,
   username: String,
   password: String,
-  fullname: String,
+  dateCreated: String,
 });
 
 module.exports = mongoose.model("Auth", authSchema);

@@ -7,6 +7,8 @@ const addNewPost = gql`
     $Booktitle: String!
     $authorID: ID!
     $genreID: ID!
+    $userID: ID!
+    $userCreator: String!
   ) {
     newPost(
       Review: $Review
@@ -14,6 +16,8 @@ const addNewPost = gql`
       Booktitle: $Booktitle
       authorID: $authorID
       genreID: $genreID
+      userID: $userID
+      userCreator: $userCreator
     ) {
       Review
       Recommendation
