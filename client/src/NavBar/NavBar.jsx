@@ -57,7 +57,13 @@ const NavBar = () => {
         <div className={dropdownclassname}>
           <div>
             <Link
-              to="/profile/truongnguyen/main"
+              to={{
+                pathname: `/profile/${localStorage.getItem("fullname")}/main`,
+                state: {
+                  fullname: localStorage.getItem("fullname"),
+                  id: localStorage.getItem("id"),
+                },
+              }}
               style={{ textDecoration: "none" }}
             >
               Profile

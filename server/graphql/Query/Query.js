@@ -106,6 +106,7 @@ const LoginType = new GraphQLObjectType({
     password: { type: GraphQLString },
     token: { type: GraphQLString },
     username: { type: GraphQLString },
+    fullname: { type: GraphQLString },
     _id: { type: GraphQLID },
   }),
 });
@@ -115,6 +116,7 @@ const UserType = new GraphQLObjectType({
   fields: () => ({
     _id: { type: GraphQLString },
     username: { type: GraphQLString },
+    fullname: { type: GraphQLString },
     FollowingList: {
       type: new GraphQLList(UserType),
       // args:{},

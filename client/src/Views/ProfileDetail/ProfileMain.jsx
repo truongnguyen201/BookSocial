@@ -4,10 +4,12 @@ import { useQuery } from "@apollo/client";
 import { getUserPost } from "../../components/Queries/getUserProfie";
 import Loading from "../../components/Loading";
 import Post from "../../components/News/Post/Post";
+import { useLocation } from "react-router-dom";
 
 const ProfileMain = () => {
+  const location = useLocation();
   const { loading, error, data } = useQuery(getUserPost, {
-    variables: { _id: localStorage.getItem("id") },
+    variables: { _id: location.state.id },
   });
 
   if (loading)

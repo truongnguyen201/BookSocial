@@ -7,6 +7,7 @@ export const getUserProfile = gql`
       NumbOfFollowing
       NumbOfFollowers
       NumbOfPost
+      username
     }
   }
 `;
@@ -42,6 +43,7 @@ export const getUserFollowers = gql`
     user(_id: $_id) {
       _id
       FollowersList {
+        fullname
         username
         _id
       }
@@ -54,6 +56,7 @@ export const getUserFollowing = gql`
     user(_id: $_id) {
       _id
       FollowingList {
+        fullname
         username
         _id
       }

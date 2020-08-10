@@ -5,6 +5,7 @@ const authSchema = new schema({
   email: String,
   username: String,
   password: String,
+  fullname: String,
   dateCreated: String,
 });
 

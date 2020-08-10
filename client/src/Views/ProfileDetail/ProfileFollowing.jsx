@@ -4,10 +4,12 @@ import { useQuery } from "@apollo/client";
 import { getUserFollowing } from "../../components/Queries/getUserProfie";
 import Loading from "../../components/Loading";
 import OtherUser from "../../components/OtherUser";
+import { useLocation } from "react-router-dom";
 
 const ProfileFollowing = () => {
+  const location = useLocation();
   const { loading, error, data } = useQuery(getUserFollowing, {
-    variables: { _id: localStorage.getItem("id") },
+    variables: { _id: location.state.id },
   });
 
   if (loading)
@@ -17,7 +19,7 @@ const ProfileFollowing = () => {
       </div>
     );
   if (error) return <div className="Posts">Error :(</div>;
-
+  console.log(data);
   return (
     <div className="ProfileFollowing">
       <div className="HeaderTitle">Following</div>
@@ -37,6 +39,8 @@ const ProfileFollowing = () => {
             <OtherUser
               key={index}
               Otherusername={following.username}
+              Otherfullname={following.fullname}
+              OtherId={following._id}
             ></OtherUser>
           ))}
         </div>

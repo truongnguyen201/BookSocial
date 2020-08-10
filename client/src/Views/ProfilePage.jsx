@@ -3,7 +3,7 @@ import NavBar from "../NavBar/NavBar";
 import MainInfo from "./ProfileInfo/MainInfo";
 import DetailInfo from "./ProfileInfo/DetailInfo";
 import ProfilePageNavBar from "./ProfileInfo/ProfilePageNavBar";
-import { Route, useRouteMatch, useParams, useHistory } from "react-router-dom";
+import { Route, useRouteMatch, useParams, useLocation } from "react-router-dom";
 import ProfilePost from "./ProfileDetail/ProfilePost";
 import ProfileFollowers from "./ProfileDetail/ProfileFollowers";
 import ProfileFollowing from "./ProfileDetail/ProfileFollowing";
@@ -15,11 +15,12 @@ import Loading from "../components/Loading";
 
 const ProfilePage = () => {
   const match = useRouteMatch();
+  const location = useLocation();
   const { profiledetail } = useParams();
   const { loading, error, data } = useQuery(getUserProfile, {
-    variables: { _id: localStorage.getItem("id") },
+    variables: { _id: location.state.id },
   });
-
+  console.log(location);
   return (
     <div className="ProfilePage">
       <NavBar></NavBar>
@@ -32,11 +33,12 @@ const ProfilePage = () => {
       {!loading && !error && (
         <div className="ProfileMainPage">
           <div>
-            <MainInfo></MainInfo>
+            <MainInfo username={data.user.username}></MainInfo>
             <ProfilePageNavBar
               NumbOfFollowing={data.user.NumbOfFollowing}
               NumbOfFollowers={data.user.NumbOfFollowers}
               NumbOfPost={data.user.NumbOfPost}
+              UserID={location.state.id}
             ></ProfilePageNavBar>
             <Route exact path={`${match.url}`}>
               {profiledetail === "main" && <ProfileMain></ProfileMain>}

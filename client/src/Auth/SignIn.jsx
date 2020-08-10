@@ -44,7 +44,9 @@ const SignIn = () => {
               var token = res.data.login.token;
               var username = res.data.login.username;
               var _id = res.data.login._id;
-              console.log(_id);
+              var fullname = res.data.login.fullname;
+
+              localStorage.setItem("fullname", fullname);
               localStorage.setItem("username", username);
               localStorage.setItem("token", token);
               localStorage.setItem("id", _id);

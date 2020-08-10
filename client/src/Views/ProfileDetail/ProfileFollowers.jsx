@@ -4,10 +4,12 @@ import { useQuery } from "@apollo/client";
 import { getUserFollowers } from "../../components/Queries/getUserProfie";
 import Loading from "../../components/Loading";
 import OtherUser from "../../components/OtherUser";
+import { useLocation } from "react-router-dom";
 
 const ProfileFollowers = () => {
+  const location = useLocation();
   const { loading, error, data } = useQuery(getUserFollowers, {
-    variables: { _id: localStorage.getItem("id") },
+    variables: { _id: location.state.id },
   });
 
   if (loading)
@@ -37,6 +39,8 @@ const ProfileFollowers = () => {
             <OtherUser
               key={index}
               Otherusername={follower.username}
+              Otherfullname={follower.fullname}
+              OtherId={follower._id}
             ></OtherUser>
           ))}
         </div>

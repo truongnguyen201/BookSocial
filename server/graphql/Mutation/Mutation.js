@@ -73,6 +73,7 @@ const Mutation = new GraphQLObjectType({
           _id: origin_id,
           email: args.email,
           username: args.username,
+          fullname: args.fullname,
           password: hashPassword,
           dateCreated: dateString,
         });
@@ -81,8 +82,6 @@ const Mutation = new GraphQLObjectType({
           _id: origin_id,
           username: args.username,
           fullname: args.fullname,
-          followers: 0,
-          following: 0,
           followersID: [],
           followingID: [],
         });
@@ -114,7 +113,12 @@ const Mutation = new GraphQLObjectType({
           }
         );
 
-        return { username: user.username, token: token, _id: user._id };
+        return {
+          username: user.username,
+          fullname: user.fullname,
+          token: token,
+          _id: user._id,
+        };
       },
     },
   },

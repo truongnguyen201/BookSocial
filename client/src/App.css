@@ -196,6 +196,12 @@
 .ProfileMainPage .ShowOtherUser .OtherUser .OtherUserName > span {
   font-weight: bold;
   user-select: none;
+  cursor: pointer;
+}
+
+.ProfileMainPage .ShowOtherUser .OtherUser .OtherUserName > span:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 3em;
 }
 
 .ProfileMainPage .ShowOtherUser .OtherUser .OtherUserName > div {
@@ -203,7 +209,7 @@
   font-weight: 12px;
 }
 
-.ProfileMainPage .ShowOtherUser .OtherUser .FollowPart > div {
+.ProfileMainPage .ShowOtherUser .OtherUser .FollowPart .Follow {
   width: 107px;
   height: 30px;
   background-color: #ebf0ff;
@@ -217,7 +223,25 @@
   cursor: pointer;
 }
 
-.ProfileMainPage .ShowOtherUser .OtherUser .FollowPart > div:hover {
+.ProfileMainPage .ShowOtherUser .OtherUser .FollowPart .Following {
+  width: 107px;
+  height: 30px;
+  background-color: #ebeced;
+  color: #636466;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.ProfileMainPage .ShowOtherUser .OtherUser .FollowPart .Following:hover {
+  background-color: #b6b7b8;
+}
+
+.ProfileMainPage .ShowOtherUser .OtherUser .FollowPart .Follow:hover {
   background-color: #d3d8e6;
 }
 

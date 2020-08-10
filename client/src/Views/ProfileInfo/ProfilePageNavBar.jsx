@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 
 const ProfilePageNavBar = (props) => {
   const { profiledetail, username } = useParams();
-  const { NumbOfFollowing, NumbOfFollowers, NumbOfPost } = props;
+  const { NumbOfFollowing, NumbOfFollowers, NumbOfPost, UserID } = props;
 
   const navbardetail = [
     { linkparams: "main", title: "Profile" },
@@ -30,7 +30,16 @@ const ProfilePageNavBar = (props) => {
     <div className="ProfilePageNavBar">
       <ul>
         {navbardetail.map((detail, index) => (
-          <Link key={index} to={`/profile/${username}/${detail.linkparams}`}>
+          <Link
+            key={index}
+            to={{
+              pathname: `/profile/${username}/${detail.linkparams}`,
+              state: {
+                fullname: username,
+                id: UserID,
+              },
+            }}
+          >
             <li>
               <span>
                 {NumbShow(detail.title)} {detail.title}
