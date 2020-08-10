@@ -5,7 +5,7 @@ import { getUserPost } from "../../components/Queries/getUserProfie";
 import Loading from "../../components/Loading";
 import Post from "../../components/News/Post/Post";
 
-const ProfilePost = () => {
+const ProfileMain = () => {
   const { loading, error, data } = useQuery(getUserPost, {
     variables: { _id: localStorage.getItem("id") },
   });
@@ -30,7 +30,7 @@ const ProfilePost = () => {
             width="150px"
             alt="boxmailicon"
           ></img>
-          <span>You haven't posted any content yet.</span>
+          <span>You haven't posted, shared and review any content yet.</span>
         </div>
       ) : (
         <div className="Posts">
@@ -54,4 +54,4 @@ const ProfilePost = () => {
   );
 };
 
-export default ProfilePost;
+export default ProfileMain;

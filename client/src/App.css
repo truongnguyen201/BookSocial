@@ -177,6 +177,50 @@
   color: #969696;
 }
 
+.ProfileMainPage .ShowOtherUser {
+  display: flex;
+  flex-direction: column;
+}
+
+.ProfileMainPage .ShowOtherUser .OtherUser {
+  background-color: white;
+  width: 95%;
+  margin-top: 10px;
+  height: 70px;
+  border-radius: 10px;
+  padding: 10px 20px;
+  display: grid;
+  grid-template-columns: 8% 72% 20%;
+}
+
+.ProfileMainPage .ShowOtherUser .OtherUser .OtherUserName > span {
+  font-weight: bold;
+  user-select: none;
+}
+
+.ProfileMainPage .ShowOtherUser .OtherUser .OtherUserName > div {
+  user-select: none;
+  font-weight: 12px;
+}
+
+.ProfileMainPage .ShowOtherUser .OtherUser .FollowPart > div {
+  width: 107px;
+  height: 30px;
+  background-color: #ebf0ff;
+  color: #2e69ff;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.ProfileMainPage .ShowOtherUser .OtherUser .FollowPart > div:hover {
+  background-color: #d3d8e6;
+}
+
 .ProfileMainPage .Posts {
   z-index: 0;
   width: 95%;

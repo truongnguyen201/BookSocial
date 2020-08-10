@@ -89,6 +89,9 @@ const PostType = new GraphQLObjectType({
         return User.findById(parent.userID);
       },
     },
+    postType: {
+      type: GraphQLString,
+    },
     userCreator: {
       type: GraphQLString,
     },
@@ -149,6 +152,12 @@ const UserType = new GraphQLObjectType({
         return parent.followersID.length;
       },
     },
+    NumbOfPost: {
+      type: GraphQLInt,
+      resolve(parent, args) {
+        return parent.postsNumb;
+      },
+    },
     posts: {
       type: new GraphQLList(PostType),
       resolve(parent, args) {
@@ -194,9 +203,9 @@ const RootQuery = new GraphQLObjectType({
     },
     user: {
       type: UserType,
-      args: { id: { type: GraphQLString } },
+      args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
       resolve(parent, args) {
-        return User.findById(args.id);
+        return User.findById(args._id);
       },
     },
     users: {

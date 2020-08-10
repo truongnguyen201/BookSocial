@@ -4,10 +4,7 @@ import menupost from "../../../img/menupost.svg";
 
 const TopPost = (props) => {
   const { UserCreator, DateCreate, UserID } = props;
-  console.log(UserID);
 
-  var diff = Math.abs(new Date() - DateCreate);
-  console.log(diff);
   return (
     <div className="top-post" style={{ display: "flex" }}>
       <div className="user-info" style={{ display: "flex", width: "95%" }}>

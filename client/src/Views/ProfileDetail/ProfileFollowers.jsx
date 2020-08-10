@@ -1,14 +1,46 @@
 import React from "react";
 import boxmail from "../../img/boxmail.png";
+import { useQuery } from "@apollo/client";
+import { getUserFollowers } from "../../components/Queries/getUserProfie";
+import Loading from "../../components/Loading";
+import OtherUser from "../../components/OtherUser";
 
 const ProfileFollowers = () => {
+  const { loading, error, data } = useQuery(getUserFollowers, {
+    variables: { _id: localStorage.getItem("id") },
+  });
+
+  if (loading)
+    return (
+      <div className="Posts">
+        <Loading></Loading>
+      </div>
+    );
+  if (error) return <div className="Posts">Error :(</div>;
+
   return (
     <div className="ProfileFollowers">
       <div className="HeaderTitle">Followers</div>
-      <div className="ProfileDetailContent">
-        <img src={boxmail} height="150px" width="150px" alt="boxmailicon"></img>
-        <span>You don't have followers yet</span>
-      </div>
+      {data.user.NumbOfFollowing === 0 ? (
+        <div className="ProfileDetailContent">
+          <img
+            src={boxmail}
+            height="150px"
+            width="150px"
+            alt="boxmailicon"
+          ></img>
+          <span>You don't have any followers yet.</span>
+        </div>
+      ) : (
+        <div className="ShowOtherUser">
+          {data.user.FollowersList.map((follower, index) => (
+            <OtherUser
+              key={index}
+              Otherusername={follower.username}
+            ></OtherUser>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

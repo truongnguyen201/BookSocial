@@ -8,6 +8,7 @@ const postSchema = new schema({
   Booktitle: String,
   userID: String,
   sharesID: [{ type: String }],
+  postType: String,
   genreID: String,
   authorID: String,
   userCreator: String,

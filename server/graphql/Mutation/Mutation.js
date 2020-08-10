@@ -45,6 +45,7 @@ const Mutation = new GraphQLObjectType({
           userCreator: args.userCreator,
           sharesID: [],
           date: dateString,
+          postType: "80111115116",
         });
         return post.save();
       },
