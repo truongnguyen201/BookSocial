@@ -10,7 +10,7 @@ import ProfileFollowing from "./ProfileDetail/ProfileFollowing";
 import ProfileShares from "./ProfileDetail/ProfileShares";
 import ProfileMain from "./ProfileDetail/ProfileMain";
 import { useQuery } from "@apollo/client";
-import { getUserProfile } from "../components/Queries/getUserProfie";
+import { getUserProfile } from "../components/Queries/getUserProfile";
 import Loading from "../components/Loading";
 
 const ProfilePage = () => {

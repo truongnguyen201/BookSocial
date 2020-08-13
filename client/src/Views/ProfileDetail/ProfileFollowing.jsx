@@ -1,7 +1,7 @@
 import React from "react";
 import boxmail from "../../img/boxmail.png";
 import { useQuery } from "@apollo/client";
-import { getUserFollowing } from "../../components/Queries/getUserProfie";
+import { getUserFollowing } from "../../components/Queries/getUserProfile";
 import Loading from "../../components/Loading";
 import OtherUser from "../../components/OtherUser";
 import { useLocation } from "react-router-dom";

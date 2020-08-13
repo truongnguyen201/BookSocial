@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import follow from "../components/Queries/follow";
 import unfollow from "../components/Queries/unfollow";
 import { useMutation } from "@apollo/client";
-import { getUserFollowers, getUserFollowing } from "./Queries/getUserProfie";
+import { getUserFollowers, getUserFollowing } from "./Queries/getUserProfile";
 import { useDispatch } from "react-redux";
 import { GetMainUserProfile } from "../redux/actions";
 

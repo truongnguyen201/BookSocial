@@ -1,5 +1,3 @@
-import { getMainUserProfile } from "../../components/Queries/getUserProfie";
-
 export const login = () => {
   return {
     type: "LOG IN",
@@ -13,27 +11,20 @@ export const logout = () => {
 
 export const GetMainUserProfile = (token, userid) => {
   return (dispatch) => {
-    // const getMainUserProfile = {
-    //   query: `query User($_id: ID!) {
-    //     user(_id: $_id) {
-    //       _id
-    //       FollowingList {
-    //         _id
-    //         username
-    //       }
-    //       username
-    //       fullname
-    //     }
-    //   }`,
-    //   variables: {
-    //     _id: userid,
-    //   },
-    // };
-
     fetch("http://localhost:4000/graphql", {
       method: "POST",
       body: JSON.stringify({
-        query: getMainUserProfile,
+        query: `query User($_id: ID!) {
+          user(_id: $_id) {
+            _id
+            FollowingList {
+              _id
+              username
+            }
+            username
+            fullname
+          }
+        }`,
         variables: { _id: userid },
       }),
       headers: {
