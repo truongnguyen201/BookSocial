@@ -169,6 +169,20 @@ const UserType = new GraphQLObjectType({
   }),
 });
 
+const FollowType = new GraphQLObjectType({
+  name: "FollowType",
+  fields: () => ({
+    state: { type: GraphQLString },
+  }),
+});
+
+const UnFollowType = new GraphQLObjectType({
+  name: "UnFollowType",
+  fields: () => ({
+    state: { type: GraphQLString },
+  }),
+});
+
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
@@ -227,4 +241,6 @@ module.exports = {
   SignUpType,
   LoginType,
   UserType,
+  FollowType,
+  UnFollowType,
 };

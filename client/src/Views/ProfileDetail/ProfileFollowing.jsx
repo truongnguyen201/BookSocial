@@ -19,7 +19,7 @@ const ProfileFollowing = () => {
       </div>
     );
   if (error) return <div className="Posts">Error :(</div>;
-  console.log(data);
+
   return (
     <div className="ProfileFollowing">
       <div className="HeaderTitle">Following</div>

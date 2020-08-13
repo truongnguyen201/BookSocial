@@ -20,7 +20,7 @@ const ProfilePage = () => {
   const { loading, error, data } = useQuery(getUserProfile, {
     variables: { _id: location.state.id },
   });
-  console.log(location);
+
   return (
     <div className="ProfilePage">
       <NavBar></NavBar>

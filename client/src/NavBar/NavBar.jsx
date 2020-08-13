@@ -2,13 +2,15 @@ import React, { useState, useRef, useEffect } from "react";
 import Logo from "../img/Logo.png";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/actions";
 import AvatarIcon from "../img/profile.svg";
 import ClassNames from "classnames";
 
 const NavBar = () => {
   const dispatch = useDispatch();
+
+  const userProfile = useSelector((state) => state.UserProfile);
 
   //func below helps delete dropdown content when click outside dropdown this code is onstackoverflow and I not really dont understand it
   function useOutsideAlerter(ref) {
@@ -58,10 +60,10 @@ const NavBar = () => {
           <div>
             <Link
               to={{
-                pathname: `/profile/${localStorage.getItem("fullname")}/main`,
+                pathname: `/profile/${userProfile.user.fullname}/main`,
                 state: {
-                  fullname: localStorage.getItem("fullname"),
-                  id: localStorage.getItem("id"),
+                  fullname: userProfile.user.fullname,
+                  id: userProfile.user._id,
                 },
               }}
               style={{ textDecoration: "none" }}
@@ -75,7 +77,6 @@ const NavBar = () => {
                 dispatch(logout());
                 localStorage.removeItem("token");
                 localStorage.removeItem("id");
-                localStorage.removeItem("username");
               }}
             >
               Logout

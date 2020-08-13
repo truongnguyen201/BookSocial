@@ -13,6 +13,7 @@ const Post = (props) => {
     UserCreator,
     UserID,
     DateCreate,
+    Fullname,
   } = props;
   return (
     <div className="Post">
@@ -20,6 +21,7 @@ const Post = (props) => {
         DateCreate={DateCreate}
         UserCreator={UserCreator}
         UserID={UserID}
+        Fullname={Fullname}
       ></TopPost>
       <MiddlePost
         author={author}

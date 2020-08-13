@@ -4,10 +4,11 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { addNewPost } from "../Queries/addNewPost";
 import { useMutation } from "@apollo/client";
 import { getPostsDetail } from "../Queries/getPostDetail";
+import { useSelector } from "react-redux";
 
 const UserPost = () => {
   const [modal, setModal] = useState(false);
-
+  const userProfile = useSelector((state) => state.UserProfile);
   const [addpost] = useMutation(addNewPost);
 
   let [newPost, setNewPost] = useState({
@@ -16,8 +17,8 @@ const UserPost = () => {
     Booktitle: "",
     genreID: "5f07eea4f2622d7e4f0ecdab",
     authorID: "5f07ee03f2622d7e4f0ecdaa",
-    userCreator: localStorage.getItem("username"),
-    userID: localStorage.getItem("id"),
+    userCreator: userProfile.user.username,
+    userID: userProfile.user._id,
   });
 
   const addPost = (e) => {
@@ -52,7 +53,7 @@ const UserPost = () => {
             <img src={AvatarIcon} alt="icon" height="30px" width="30px"></img>
           </div>
           <div className="UserName" style={{ marginLeft: "20px" }}>
-            {localStorage.getItem("username")}
+            {userProfile.user.username}
           </div>
         </div>
         <div

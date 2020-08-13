@@ -252,7 +252,7 @@ const SignUp = () => {
 
   return (
     <div className="right-container">
-      <h1>Amstagram</h1>
+      <h1>LIber</h1>
       {loadedSucess ? (
         <div
           className="login-form sign-up"

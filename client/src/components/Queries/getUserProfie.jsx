@@ -1,5 +1,19 @@
 import { gql } from "@apollo/client";
 
+export const getMainUserProfile = gql`
+  query User($_id: ID!) {
+    user(_id: $_id) {
+      _id
+      FollowingList {
+        _id
+        username
+      }
+      username
+      fullname
+    }
+  }
+`;
+
 export const getUserProfile = gql`
   query User($_id: ID!) {
     user(_id: $_id) {
@@ -29,6 +43,7 @@ export const getUserPost = gql`
         }
         user {
           _id
+          fullname
         }
         userCreator
         date
@@ -70,4 +85,5 @@ export default {
   getUserFollowers,
   getUserFollowing,
   getUserPost,
+  getMainUserProfile,
 };

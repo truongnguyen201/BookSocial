@@ -47,6 +47,7 @@ const ProfileMain = () => {
                 UserCreator={userpost.userCreator}
                 UserID={userpost.user._id}
                 DateCreate={userpost.date}
+                Fullname={userpost.user.fullname}
               ></Post>
             </div>
           ))}

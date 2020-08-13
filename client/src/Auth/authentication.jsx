@@ -5,12 +5,11 @@ import { useSelector } from "react-redux";
 export const PrivateRoute = ({ children, ...rest }) => {
   // const loggin = useSelector((state) => state.isLogged);
   const loggin = true;
-  let [token, setToken] = useState(null);
-  useEffect(() => {
-    setToken(localStorage.getItem("token"));
-    console.log(token);
-  }, [token]);
-
+  let [token, setToken] = useState(localStorage.getItem("token"));
+  // useEffect(() => {
+  //   setToken(localStorage.getItem("token"));
+  // }, [token]);
+  // console.log(token);
   return (
     <Route
       {...rest}

@@ -6,7 +6,13 @@ const graphql = require("graphql");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
-const { PostType, SignUpType, LoginType } = require("../Query/Query");
+const {
+  PostType,
+  SignUpType,
+  LoginType,
+  FollowType,
+  UnFollowType,
+} = require("../Query/Query");
 
 dotenv.config();
 
@@ -119,6 +125,52 @@ const Mutation = new GraphQLObjectType({
           token: token,
           _id: user._id,
         };
+      },
+    },
+
+    follow: {
+      type: FollowType,
+      args: {
+        userID: { type: new GraphQLNonNull(GraphQLID) },
+        followingid: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        const state = await User.updateOne(
+          { _id: args.userID },
+          { $push: { followingID: args.followingid } }
+        );
+
+        const state2 = await User.updateOne(
+          { _id: args.followingid },
+          { $push: { followersID: args.userID } }
+        );
+
+        if (state.nModified !== 1 && state2.nModified !== 1)
+          return { state: "unSuccess" };
+        return { state: "success" };
+      },
+    },
+
+    unfollow: {
+      type: UnFollowType,
+      args: {
+        userID: { type: new GraphQLNonNull(GraphQLID) },
+        unFollowid: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        const state = await User.updateOne(
+          { _id: args.userID },
+          { $pull: { followingID: args.unFollowid } }
+        );
+
+        const state2 = await User.updateOne(
+          { _id: args.unFollowid },
+          { $pull: { followersID: args.userID } }
+        );
+
+        if (state.nModified !== 1 && state2.nModified !== 1)
+          return { state: "unSuccess" };
+        return { state: "success" };
       },
     },
   },

@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import isLogged from "./isLogged";
-import response from "./response";
+import GetMainUserProfile from "./GetMainUserProfile";
 
 const AllReducers = combineReducers({
   isLogged: isLogged,
-  response: response,
+  UserProfile: GetMainUserProfile,
 });
 
 export default AllReducers;

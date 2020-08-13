@@ -8,6 +8,8 @@ import AllReducers from "./redux/reducers";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
+import client from "./graphql/cofigure";
+import { ApolloProvider } from "@apollo/client";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const myStore = createStore(
@@ -16,9 +18,11 @@ const myStore = createStore(
 );
 
 ReactDOM.render(
-  <Provider store={myStore}>
-    <App />
-  </Provider>,
+  <ApolloProvider client={client}>
+    <Provider store={myStore}>
+      <App />
+    </Provider>
+  </ApolloProvider>,
   document.getElementById("root")
 );
 

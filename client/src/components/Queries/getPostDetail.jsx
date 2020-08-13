@@ -15,6 +15,7 @@ const getPostsDetail = gql`
       }
       user {
         _id
+        fullname
       }
       userCreator
       date

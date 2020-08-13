@@ -26,6 +26,7 @@ const Posts = () => {
             UserCreator={post.userCreator}
             UserID={post.user._id}
             DateCreate={post.date}
+            Fullname={post.user.fullname}
           ></Post>
         </div>
       ))}

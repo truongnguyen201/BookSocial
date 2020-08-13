@@ -5,7 +5,7 @@ import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../redux/actions";
+import { login, GetMainUserProfile } from "../redux/actions";
 import { useMutation } from "@apollo/client";
 import { SignInQueries } from "./SignInQueries";
 
@@ -25,7 +25,7 @@ const SignIn = () => {
 
   return (
     <div className="right-container">
-      <h1>Amstagram</h1>
+      <h1>LIber</h1>
       <Formik
         className="login-form"
         validationSchema={SignInSchema}
@@ -42,16 +42,15 @@ const SignIn = () => {
           })
             .then((res) => {
               var token = res.data.login.token;
-              var username = res.data.login.username;
               var _id = res.data.login._id;
-              var fullname = res.data.login.fullname;
 
-              localStorage.setItem("fullname", fullname);
-              localStorage.setItem("username", username);
               localStorage.setItem("token", token);
               localStorage.setItem("id", _id);
+
               dispatch(login());
+              dispatch(GetMainUserProfile(token, _id));
               history.push("/");
+
               setIsLoaded(false);
             })
             .catch((err) => {

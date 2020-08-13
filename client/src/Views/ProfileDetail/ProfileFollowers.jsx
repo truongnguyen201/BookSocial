@@ -23,7 +23,7 @@ const ProfileFollowers = () => {
   return (
     <div className="ProfileFollowers">
       <div className="HeaderTitle">Followers</div>
-      {data.user.NumbOfFollowing === 0 ? (
+      {data.user.NumbOfFollowers === 0 ? (
         <div className="ProfileDetailContent">
           <img
             src={boxmail}
