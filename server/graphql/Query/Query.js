@@ -64,6 +64,7 @@ const ReplyCommentType = new GraphQLObjectType({
         return User.findById(parent.userID);
       },
     },
+    time: { type: GraphQLString },
     state: {
       type: GraphQLString,
     },
@@ -81,6 +82,7 @@ const PostCommentType = new GraphQLObjectType({
         return User.findById(parent.userID);
       },
     },
+    time: { type: GraphQLString },
     state: { type: GraphQLString },
     replyComments: {
       type: new GraphQLList(ReplyCommentType),
