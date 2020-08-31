@@ -13,6 +13,15 @@ const postSchema = new schema({
   authorID: String,
   userCreator: String,
   date: String,
+  comments: [
+    {
+      PostCommentID: String,
+      content: String,
+      userID: String,
+      time: String,
+      replyComments: [{ content: String, userID: String, time: String }],
+    },
+  ],
 });
 
 module.exports = mongoose.model("Posts", postSchema);

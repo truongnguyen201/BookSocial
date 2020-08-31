@@ -53,6 +53,44 @@ const SignUpType = new GraphQLObjectType({
   }),
 });
 
+const ReplyCommentType = new GraphQLObjectType({
+  name: "ReplyCommentType",
+  fields: () => ({
+    _id: { type: GraphQLID },
+    content: { type: GraphQLString },
+    userID: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userID);
+      },
+    },
+    state: {
+      type: GraphQLString,
+    },
+  }),
+});
+
+const PostCommentType = new GraphQLObjectType({
+  name: "PostCommentType",
+  fields: () => ({
+    _id: { type: GraphQLID },
+    content: { type: GraphQLString },
+    userID: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userID);
+      },
+    },
+    state: { type: GraphQLString },
+    replyComments: {
+      type: new GraphQLList(ReplyCommentType),
+      resolve(parent, args) {
+        return parent.replyComments;
+      },
+    },
+  }),
+});
+
 const PostType = new GraphQLObjectType({
   name: "Post",
   fields: () => ({
@@ -96,6 +134,7 @@ const PostType = new GraphQLObjectType({
       type: GraphQLString,
     },
     date: { type: GraphQLString },
+    comments: { type: new GraphQLList(PostCommentType) },
   }),
 });
 
@@ -243,4 +282,6 @@ module.exports = {
   UserType,
   FollowType,
   UnFollowType,
+  PostCommentType,
+  ReplyCommentType,
 };

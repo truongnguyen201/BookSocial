@@ -12,6 +12,8 @@ const {
   LoginType,
   FollowType,
   UnFollowType,
+  PostCommentType,
+  ReplyCommentType,
 } = require("../Query/Query");
 
 dotenv.config();
@@ -170,6 +172,67 @@ const Mutation = new GraphQLObjectType({
 
         if (state.nModified !== 1 && state2.nModified !== 1)
           return { state: "unSuccess" };
+        return { state: "success" };
+      },
+    },
+
+    addPostComment: {
+      type: PostCommentType,
+      args: {
+        postID: { type: new GraphQLNonNull(GraphQLID) },
+        userID: { type: new GraphQLNonNull(GraphQLID) },
+        content: { type: GraphQLString },
+      },
+      async resolve(parent, args) {
+        const date = new Date();
+        const post = await Post.updateOne(
+          {
+            _id: args.postID,
+          },
+          {
+            $push: {
+              comments: {
+                content: args.content,
+                userID: args.userID,
+                time: date,
+                replyComments: [],
+              },
+            },
+          }
+        );
+        if (post.nModified !== 1) return new GraphQLError("something wrong ");
+        return { state: "success" };
+      },
+    },
+    addReplyComment: {
+      type: ReplyCommentType,
+      args: {
+        postID: { type: new GraphQLNonNull(GraphQLID) },
+        postCommentID: { type: new GraphQLNonNull(GraphQLString) },
+        userID: { type: new GraphQLNonNull(GraphQLID) },
+        content: { type: GraphQLString },
+      },
+      async resolve(parent, args) {
+        const date = new Date();
+        const post = await Post.updateOne(
+          {
+            _id: args.postID,
+            "comments._id": args.postCommentID,
+          },
+
+          {
+            $push: {
+              "comments.$.replyComments": {
+                content: args.content,
+                PostCommentID: args.postCommentID,
+                userID: args.userID,
+                time: date,
+              },
+            },
+          }
+        );
+
+        if (post.nModified !== 1) return new GraphQLError("something wrong");
         return { state: "success" };
       },
     },
