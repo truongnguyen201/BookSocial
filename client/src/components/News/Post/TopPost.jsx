@@ -2,6 +2,7 @@ import React from "react";
 import avatarUserIcon from "../../../img/profile.svg";
 import menupost from "../../../img/menupost.svg";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const TopPost = (props) => {
   const { UserCreator, DateCreate, UserID, Fullname } = props;
@@ -33,7 +34,7 @@ const TopPost = (props) => {
               fontFamily: "'Merriweather Sans', sans-serif",
             }}
           >
-            {DateCreate}
+            {moment(DateCreate, "LLLL").startOf("minute").fromNow()}
           </div>
         </div>
       </div>
