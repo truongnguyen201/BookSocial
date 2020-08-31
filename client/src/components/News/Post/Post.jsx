@@ -14,6 +14,7 @@ const Post = (props) => {
     UserID,
     DateCreate,
     Fullname,
+    postID,
   } = props;
   return (
     <div className="Post">
@@ -30,7 +31,7 @@ const Post = (props) => {
         genre={genre}
         Booktitle={Booktitle}
       ></MiddlePost>
-      <BottomPost></BottomPost>
+      <BottomPost postID={postID}></BottomPost>
     </div>
   );
 };

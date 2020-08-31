@@ -368,8 +368,32 @@
 
 .MainInfo .UserName {
   padding-left: 120px;
-  font-weight: bold;
+  display: flex;
+}
+
+.MainInfo .UserName .text {
+  width: 90%;
   font-size: 18px;
+  font-weight: bold;
+}
+
+.MainInfo .UserName .follow {
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.MainInfo .UserName .following {
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to right, #80d8ff, #ea80fc);
+  color: transparent;
+  background-clip: text;
 }
 
 /* ProfilePage */

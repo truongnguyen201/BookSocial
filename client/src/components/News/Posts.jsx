@@ -18,6 +18,7 @@ const Posts = () => {
       {data?.posts.map((post, index) => (
         <div key={index}>
           <Post
+            postID={post._id}
             author={post.author.name}
             Review={post.Review}
             Recommendation={post.Recommendation}

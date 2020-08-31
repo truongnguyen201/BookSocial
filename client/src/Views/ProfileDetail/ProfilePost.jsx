@@ -39,6 +39,7 @@ const ProfilePost = () => {
           {data.user.posts.map((userpost, index) => (
             <div key={index}>
               <Post
+                postID={userpost._id}
                 author={userpost.author.name}
                 Review={userpost.Review}
                 Recommendation={userpost.Recommendation}

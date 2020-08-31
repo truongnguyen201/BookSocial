@@ -33,7 +33,10 @@ const ProfilePage = () => {
       {!loading && !error && (
         <div className="ProfileMainPage">
           <div>
-            <MainInfo username={data.user.username}></MainInfo>
+            <MainInfo
+              username={data.user.username}
+              UserID={location.state.id}
+            ></MainInfo>
             <ProfilePageNavBar
               NumbOfFollowing={data.user.NumbOfFollowing}
               NumbOfFollowers={data.user.NumbOfFollowers}
