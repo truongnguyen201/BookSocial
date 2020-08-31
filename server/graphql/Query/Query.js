@@ -229,7 +229,7 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     post: {
       type: PostType,
-      args: { id: { type: GraphQLNonNull(GraphQLString) } },
+      args: { id: { type: GraphQLNonNull(GraphQLID) } },
       resolve(parent, args, context) {
         // if (!context.auth) return new GraphQLError("You haven't loggin yet");
         return Post.findById(args.id);
