@@ -13,6 +13,7 @@ const Posts = () => {
       </div>
     );
   if (error) return <div className="Posts">Error :(</div>;
+
   return (
     <div className="Posts">
       {data?.posts.map((post, index) => (
@@ -28,6 +29,7 @@ const Posts = () => {
             UserID={post.user._id}
             DateCreate={post.date}
             Fullname={post.user.fullname}
+            rateCount={post.rateCount}
           ></Post>
         </div>
       ))}

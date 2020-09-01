@@ -137,6 +137,7 @@ const PostType = new GraphQLObjectType({
     },
     date: { type: GraphQLString },
     comments: { type: new GraphQLList(PostCommentType) },
+    rateCount: { type: GraphQLInt },
   }),
 });
 
@@ -231,6 +232,20 @@ const deletePost = new GraphQLObjectType({
   }),
 });
 
+const upVote = new GraphQLObjectType({
+  name: "UpVote",
+  fields: () => ({
+    state: { type: GraphQLString },
+  }),
+});
+
+const unVote = new GraphQLObjectType({
+  name: "UnVote",
+  fields: () => ({
+    state: { type: GraphQLString },
+  }),
+});
+
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
@@ -294,4 +309,6 @@ module.exports = {
   PostCommentType,
   ReplyCommentType,
   deletePost,
+  upVote,
+  unVote,
 };

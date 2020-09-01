@@ -15,6 +15,8 @@ const {
   PostCommentType,
   ReplyCommentType,
   deletePost,
+  upVote,
+  unVote,
 } = require("../Query/Query");
 
 dotenv.config();
@@ -25,6 +27,7 @@ const {
   GraphQLID,
   GraphQLNonNull,
   GraphQLError,
+  GraphQLInt,
 } = graphql;
 
 const Mutation = new GraphQLObjectType({
@@ -54,6 +57,7 @@ const Mutation = new GraphQLObjectType({
           userCreator: args.userCreator,
           sharesID: [],
           date: dateString,
+          rateCount: 0,
           postType: "80111115116",
         });
         return post.save();
@@ -246,6 +250,53 @@ const Mutation = new GraphQLObjectType({
         await Post.deleteOne({ _id: args.postID });
 
         return { state: "delete success" };
+      },
+    },
+
+    upVote: {
+      type: upVote,
+      args: {
+        // rateCount: { type: GraphQLInt },
+        postID: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        const post = await Post.updateOne(
+          {
+            _id: args.postID,
+          },
+          {
+            $inc: {
+              rateCount: 1,
+            },
+          }
+        );
+
+        if (post.nModified !== 1) return new GraphQLError("something wrong");
+        return { state: "success" };
+      },
+    },
+
+    unVote: {
+      type: unVote,
+      args: {
+        rateCount: { type: GraphQLInt },
+        postID: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        if (args.rateCount < 1) return { state: "cannot unvote" };
+        const post = await Post.updateOne(
+          {
+            _id: args.postID,
+          },
+          {
+            $inc: {
+              rateCount: -1,
+            },
+          }
+        );
+
+        if (post.nModified !== 1) return new GraphQLError("something wrong");
+        return { state: "success" };
       },
     },
   },

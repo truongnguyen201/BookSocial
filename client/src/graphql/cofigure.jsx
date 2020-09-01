@@ -28,6 +28,11 @@ export const client = new ApolloClient({
               return incoming;
             },
           },
+          post: {
+            merge(existing, incoming) {
+              return incoming;
+            },
+          },
         },
       },
     },
