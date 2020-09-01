@@ -14,6 +14,7 @@ const {
   UnFollowType,
   PostCommentType,
   ReplyCommentType,
+  deletePost,
 } = require("../Query/Query");
 
 dotenv.config();
@@ -234,6 +235,17 @@ const Mutation = new GraphQLObjectType({
 
         if (post.nModified !== 1) return new GraphQLError("something wrong");
         return { state: "success" };
+      },
+    },
+    deletePost: {
+      type: deletePost,
+      args: {
+        postID: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        await Post.deleteOne({ _id: args.postID });
+
+        return { state: "delete success" };
       },
     },
   },

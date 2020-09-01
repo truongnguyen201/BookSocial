@@ -224,6 +224,13 @@ const UnFollowType = new GraphQLObjectType({
   }),
 });
 
+const deletePost = new GraphQLObjectType({
+  name: "DeletePost",
+  fields: () => ({
+    state: { type: GraphQLString },
+  }),
+});
+
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
@@ -286,4 +293,5 @@ module.exports = {
   UnFollowType,
   PostCommentType,
   ReplyCommentType,
+  deletePost,
 };

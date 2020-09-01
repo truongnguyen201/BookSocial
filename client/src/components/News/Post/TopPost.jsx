@@ -3,13 +3,30 @@ import avatarUserIcon from "../../../img/profile.svg";
 import menupost from "../../../img/menupost.svg";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import { useMutation } from "@apollo/client";
+import deletePost from "../../Queries/deletePost";
+import { useSelector } from "react-redux";
+import { getPostsDetail } from "../../Queries/getPostDetail";
 
 const TopPost = (props) => {
-  const { UserCreator, DateCreate, UserID, Fullname } = props;
+  const { UserCreator, DateCreate, UserID, Fullname, postID } = props;
+  const [deletepost] = useMutation(deletePost);
+  const userprofile = useSelector((state) => state.UserProfile);
+
+  const DeletePost = () => {
+    if (userprofile.user._id === UserID) {
+      deletepost({
+        variables: {
+          postID: postID,
+        },
+        refetchQueries: [{ query: getPostsDetail }],
+      });
+    }
+  };
 
   return (
-    <div className="top-post" style={{ display: "flex" }}>
-      <div className="user-info" style={{ display: "flex", width: "95%" }}>
+    <div className="top-post">
+      <div className="user-info">
         <div className="avatar" style={{ marginRight: "10px" }}>
           <img src={avatarUserIcon} alt="icon" width="40px" height="40px"></img>
         </div>
@@ -38,7 +55,7 @@ const TopPost = (props) => {
           </div>
         </div>
       </div>
-      <div className="menu-post">
+      <div className="menu-post" onClick={DeletePost}>
         <img src={menupost} alt="icon" height="20px" width="20px"></img>
       </div>
     </div>

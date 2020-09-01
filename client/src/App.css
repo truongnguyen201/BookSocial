@@ -273,6 +273,28 @@
   justify-content: center;
   align-items: center;
 }
+.ProfileMainPage .Posts .top-post {
+  display: flex;
+}
+
+.ProfileMainPage .Posts .top-post .user-info {
+  display: flex;
+  width: 95%;
+}
+
+.ProfileMainPage .Posts .top-post .menu-post {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ProfileMainPage .Posts .top-post .menu-post:hover {
+  background-color: #dedede;
+}
 
 .ProfileMainPage .ProfilePageNavBar {
   background-color: white;
@@ -440,6 +462,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.News .Posts .top-post {
+  display: flex;
+}
+
+.News .Posts .top-post .user-info {
+  display: flex;
+  width: 95%;
+}
+
+.News .Posts .top-post .menu-post {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.News .Posts .top-post .menu-post:hover {
+  background-color: #dedede;
 }
 
 /* .News */

@@ -23,6 +23,7 @@ const Post = (props) => {
         UserCreator={UserCreator}
         UserID={UserID}
         Fullname={Fullname}
+        postID={postID}
       ></TopPost>
       <MiddlePost
         author={author}
