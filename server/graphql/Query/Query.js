@@ -138,6 +138,9 @@ const PostType = new GraphQLObjectType({
     date: { type: GraphQLString },
     comments: { type: new GraphQLList(PostCommentType) },
     rateCount: { type: GraphQLInt },
+    userVoted: {
+      type: new GraphQLList(GraphQLString),
+    },
   }),
 });
 

@@ -1,11 +1,10 @@
 import { gql } from "@apollo/client";
 
-const getRateCount = gql`
+const getVote = gql`
   query Post($id: ID!) {
     post(id: $id) {
-      rateCount
+      userVoted
     }
   }
 `;
-
-export default getRateCount;
+export default getVote;

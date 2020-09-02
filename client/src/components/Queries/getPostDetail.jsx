@@ -20,6 +20,7 @@ const getPostsDetail = gql`
       userCreator
       date
       rateCount
+      userVoted
     }
   }
 `;

@@ -16,7 +16,9 @@ const Post = (props) => {
     Fullname,
     postID,
     rateCount,
+    isVoted,
   } = props;
+
   return (
     <div className="Post">
       <TopPost
@@ -33,7 +35,11 @@ const Post = (props) => {
         genre={genre}
         Booktitle={Booktitle}
       ></MiddlePost>
-      <BottomPost postID={postID} rateCount={rateCount}></BottomPost>
+      <BottomPost
+        postID={postID}
+        rateCount={rateCount}
+        IsVoted={isVoted}
+      ></BottomPost>
     </div>
   );
 };

@@ -3,9 +3,11 @@ import Post from "./Post/Post";
 import { useQuery } from "@apollo/client";
 import { getPostsDetail } from "../Queries/getPostDetail";
 import Loading from "../Loading";
+import { useSelector } from "react-redux";
 
 const Posts = () => {
   const { loading, error, data } = useQuery(getPostsDetail);
+  const userprofile = useSelector((state) => state.UserProfile.user);
   if (loading)
     return (
       <div className="Posts">
@@ -30,6 +32,11 @@ const Posts = () => {
             DateCreate={post.date}
             Fullname={post.user.fullname}
             rateCount={post.rateCount}
+            isVoted={
+              post.userVoted.find((id) => id === userprofile._id) !== undefined
+                ? true
+                : false
+            }
           ></Post>
         </div>
       ))}

@@ -58,6 +58,7 @@ const Mutation = new GraphQLObjectType({
           sharesID: [],
           date: dateString,
           rateCount: 0,
+          userVoted: [],
           postType: "80111115116",
         });
         return post.save();
@@ -256,7 +257,7 @@ const Mutation = new GraphQLObjectType({
     upVote: {
       type: upVote,
       args: {
-        // rateCount: { type: GraphQLInt },
+        userID: { type: new GraphQLNonNull(GraphQLID) },
         postID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(parent, args) {
@@ -267,6 +268,9 @@ const Mutation = new GraphQLObjectType({
           {
             $inc: {
               rateCount: 1,
+            },
+            $push: {
+              userVoted: args.userID,
             },
           }
         );
@@ -279,11 +283,10 @@ const Mutation = new GraphQLObjectType({
     unVote: {
       type: unVote,
       args: {
-        rateCount: { type: GraphQLInt },
         postID: { type: new GraphQLNonNull(GraphQLID) },
+        userID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(parent, args) {
-        if (args.rateCount < 1) return { state: "cannot unvote" };
         const post = await Post.updateOne(
           {
             _id: args.postID,
@@ -291,6 +294,9 @@ const Mutation = new GraphQLObjectType({
           {
             $inc: {
               rateCount: -1,
+            },
+            $pull: {
+              userVoted: args.userID,
             },
           }
         );

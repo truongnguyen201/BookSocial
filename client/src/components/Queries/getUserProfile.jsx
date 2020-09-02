@@ -33,6 +33,7 @@ export const getUserPost = gql`
         }
         userCreator
         date
+        userVoted
       }
       NumbOfPost
     }

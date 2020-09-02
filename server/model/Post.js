@@ -14,6 +14,7 @@ const postSchema = new schema({
   userCreator: String,
   date: String,
   rateCount: Number,
+  userVoted: [{ type: String }],
   comments: [
     {
       PostCommentID: String,

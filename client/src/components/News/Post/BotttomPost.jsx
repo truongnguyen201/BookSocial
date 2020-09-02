@@ -12,18 +12,23 @@ import addPostComment from "../../Queries/addPostComment";
 import { useSelector } from "react-redux";
 import { UpVote, UnVote } from "../../Queries/Vote";
 import getRateCount from "../../Queries/getRateCount";
+import getVote from "../../Queries/getVote";
 
 const BotttomPost = (props) => {
-  const { postID, rateCount } = props;
+  const { postID, rateCount, IsVoted } = props;
 
   const [isCommented, setIsCommented] = useState(false);
-  const [isVoted, setIsVoted] = useState(false);
+  const [isVoted, setIsVoted] = useState(IsVoted);
   const [commentContent, setCommentContent] = useState("");
   const [RateCount, setRateCount] = useState(rateCount);
   const commentRef = useRef();
 
   const userprofile = useSelector((state) => state.UserProfile.user);
   const res = useQuery(getRateCount, {
+    variables: { id: postID },
+  });
+
+  const resVote = useQuery(getVote, {
     variables: { id: postID },
   });
 
@@ -67,6 +72,7 @@ const BotttomPost = (props) => {
       upvote({
         variables: {
           postID: postID,
+          userID: userprofile._id,
         },
         refetchQueries: [
           {
@@ -82,6 +88,7 @@ const BotttomPost = (props) => {
       unvote({
         variables: {
           postID: postID,
+          userID: userprofile._id,
         },
         refetchQueries: [
           {
@@ -99,7 +106,13 @@ const BotttomPost = (props) => {
     if (!res.loading) {
       setRateCount(res.data.post.rateCount);
     }
-  }, [res]);
+    if (!resVote.loading) {
+      resVote.data.post.userVoted.find((id) => id === userprofile._id) !==
+      undefined
+        ? setIsVoted(true)
+        : setIsVoted(false);
+    }
+  }, [res, resVote]);
 
   return (
     <div className="BottomPost" style={{ padding: "10px 0px" }}>
