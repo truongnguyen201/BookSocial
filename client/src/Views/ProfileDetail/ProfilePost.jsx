@@ -5,13 +5,15 @@ import { getUserPost } from "../../components/Queries/getUserProfile";
 import Loading from "../../components/Loading";
 import Post from "../../components/News/Post/Post";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ProfilePost = () => {
   const location = useLocation();
   const { loading, error, data } = useQuery(getUserPost, {
     variables: { _id: location.state.id },
+    fetchPolicy: "cache-and-network",
   });
-
+  const userprofile = useSelector((state) => state.UserProfile.user);
   if (loading)
     return (
       <div className="Posts">
@@ -48,6 +50,13 @@ const ProfilePost = () => {
                 UserCreator={userpost.userCreator}
                 UserID={userpost.user._id}
                 DateCreate={userpost.date}
+                rateCount={userpost.rateCount}
+                isVoted={
+                  userpost.userVoted.find((id) => id === userprofile._id) !==
+                  undefined
+                    ? true
+                    : false
+                }
               ></Post>
             </div>
           ))}

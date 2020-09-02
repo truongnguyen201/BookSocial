@@ -6,12 +6,11 @@ import isCommentedIcon from "../../../img/isCommented.svg";
 import unVotedIcon from "../../../img/star.svg";
 import votedIcon from "../../../img/vote.svg";
 import PostComment from "./PostComment";
-import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import getComment from "../../Queries/getComment";
 import addPostComment from "../../Queries/addPostComment";
 import { useSelector } from "react-redux";
 import { UpVote, UnVote } from "../../Queries/Vote";
-import getRateCount from "../../Queries/getRateCount";
 import getVote from "../../Queries/getVote";
 
 const BotttomPost = (props) => {
@@ -24,13 +23,6 @@ const BotttomPost = (props) => {
   const commentRef = useRef();
 
   const userprofile = useSelector((state) => state.UserProfile.user);
-  const res = useQuery(getRateCount, {
-    variables: { id: postID },
-  });
-
-  const resVote = useQuery(getVote, {
-    variables: { id: postID },
-  });
 
   let commentIcon;
   let voteIcon;
@@ -41,6 +33,10 @@ const BotttomPost = (props) => {
   isVoted ? (voteIcon = votedIcon) : (voteIcon = unVotedIcon);
 
   const [loadingComment, { loading, error, data }] = useLazyQuery(getComment, {
+    variables: { id: postID },
+  });
+
+  const [loadingvote, res] = useLazyQuery(getVote, {
     variables: { id: postID },
   });
 
@@ -67,8 +63,8 @@ const BotttomPost = (props) => {
 
   const voteAction = () => {
     setIsVoted(!isVoted);
+    loadingvote();
     if (!isVoted) {
-      setRateCount(RateCount + 1);
       upvote({
         variables: {
           postID: postID,
@@ -76,7 +72,7 @@ const BotttomPost = (props) => {
         },
         refetchQueries: [
           {
-            query: getRateCount,
+            query: getVote,
             variables: {
               id: postID,
             },
@@ -84,7 +80,6 @@ const BotttomPost = (props) => {
         ],
       });
     } else {
-      setRateCount(RateCount - 1);
       unvote({
         variables: {
           postID: postID,
@@ -92,27 +87,24 @@ const BotttomPost = (props) => {
         },
         refetchQueries: [
           {
-            query: getRateCount,
+            query: getVote,
             variables: {
               id: postID,
             },
           },
         ],
       });
+      loadingvote();
     }
   };
 
   useEffect(() => {
-    if (!res.loading) {
-      setRateCount(res.data.post.rateCount);
+    if (res.data !== undefined) {
+      if (!res.loading) {
+        setRateCount(res.data.post.rateCount);
+      }
     }
-    if (!resVote.loading) {
-      resVote.data.post.userVoted.find((id) => id === userprofile._id) !==
-      undefined
-        ? setIsVoted(true)
-        : setIsVoted(false);
-    }
-  }, [res, resVote]);
+  }, [res, userprofile]);
 
   return (
     <div className="BottomPost" style={{ padding: "10px 0px" }}>

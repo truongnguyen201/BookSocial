@@ -44,7 +44,7 @@ const Mutation = new GraphQLObjectType({
         userCreator: { type: new GraphQLNonNull(GraphQLString) },
         userID: { type: new GraphQLNonNull(GraphQLID) },
       },
-      resolve(parent, args, context) {
+      async resolve(parent, args, context) {
         if (!context.auth) return new GraphQLError("You haven't loggin yet");
         var dateString = new Date();
         let post = new Post({
@@ -61,6 +61,17 @@ const Mutation = new GraphQLObjectType({
           userVoted: [],
           postType: "80111115116",
         });
+        const user = await User.updateOne(
+          {
+            _id: args.userID,
+          },
+          {
+            $inc: {
+              NumbOfPost: 1,
+            },
+          }
+        );
+        if (user.nModified !== 1) return new GraphQLError("somthing wrong");
         return post.save();
       },
     },
@@ -94,6 +105,7 @@ const Mutation = new GraphQLObjectType({
 
         let user = new User({
           _id: origin_id,
+          NumbOfPost: 0,
           username: args.username,
           fullname: args.fullname,
           followersID: [],
@@ -245,11 +257,22 @@ const Mutation = new GraphQLObjectType({
     deletePost: {
       type: deletePost,
       args: {
+        userID: { type: new GraphQLNonNull(GraphQLID) },
         postID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(parent, args) {
         await Post.deleteOne({ _id: args.postID });
-
+        const user = await User.updateOne(
+          {
+            _id: args.userID,
+          },
+          {
+            $inc: {
+              NumbOfPost: -1,
+            },
+          }
+        );
+        if (user.nModified !== 1) return new GraphQLError("somthing wrong");
         return { state: "delete success" };
       },
     },

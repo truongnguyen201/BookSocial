@@ -32,6 +32,13 @@ export const client = new ApolloClient({
             merge(existing, incoming) {
               return incoming;
             },
+            fields: {
+              userVoted: {
+                merge(existing, incoming) {
+                  return incoming;
+                },
+              },
+            },
           },
         },
       },

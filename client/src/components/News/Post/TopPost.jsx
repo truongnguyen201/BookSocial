@@ -7,6 +7,7 @@ import { useMutation } from "@apollo/client";
 import deletePost from "../../Queries/deletePost";
 import { useSelector } from "react-redux";
 import { getPostsDetail } from "../../Queries/getPostDetail";
+import { getUserPost } from "../../Queries/getUserProfile";
 
 const TopPost = (props) => {
   const { UserCreator, DateCreate, UserID, Fullname, postID } = props;
@@ -18,8 +19,17 @@ const TopPost = (props) => {
       deletepost({
         variables: {
           postID: postID,
+          userID: userprofile.user._id,
         },
-        refetchQueries: [{ query: getPostsDetail }],
+        refetchQueries: [
+          { query: getPostsDetail },
+          {
+            query: getUserPost,
+            variables: {
+              _id: postID,
+            },
+          },
+        ],
       });
     }
   };

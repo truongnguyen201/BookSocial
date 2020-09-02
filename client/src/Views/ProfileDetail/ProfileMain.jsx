@@ -11,6 +11,7 @@ const ProfileMain = () => {
   const location = useLocation();
   const { loading, error, data } = useQuery(getUserPost, {
     variables: { _id: location.state.id },
+    fetchPolicy: "cache-and-network",
   });
   const userprofile = useSelector((state) => state.UserProfile.user);
   if (loading)
@@ -50,6 +51,7 @@ const ProfileMain = () => {
                 UserID={userpost.user._id}
                 DateCreate={userpost.date}
                 Fullname={userpost.user.fullname}
+                rateCount={userpost.rateCount}
                 isVoted={
                   userpost.userVoted.find((id) => id === userprofile._id) !==
                   undefined

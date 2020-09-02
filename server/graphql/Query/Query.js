@@ -202,7 +202,7 @@ const UserType = new GraphQLObjectType({
     NumbOfPost: {
       type: GraphQLInt,
       resolve(parent, args) {
-        return parent.postsNumb;
+        return parent.NumbOfPost;
       },
     },
     posts: {

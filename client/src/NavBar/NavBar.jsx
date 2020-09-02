@@ -42,12 +42,13 @@ const NavBar = () => {
     <div className="Nav-bar">
       <div className="logo">
         <img src={Logo} alt="Logo" height="50px" width="auto"></img>
-      </div>
-      <div className="Home">
-        <Link to="/" style={{ textDecoration: "none", color: "#302579" }}>
-          Home
-        </Link>
-      </div>
+      </div>{" "}
+      <Link
+        to="/"
+        style={{ textDecoration: "none", color: "#302579", height: "100%" }}
+      >
+        <div className="Home">Home</div>{" "}
+      </Link>
       <div className="Notification">
         <div>Notification</div>
       </div>

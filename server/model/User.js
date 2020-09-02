@@ -7,8 +7,7 @@ const UserSchema = new schema({
   fullname: { type: String },
   followersID: [{ type: String }],
   followingID: [{ type: String }],
-  postsNumb: { type: Number },
-  postRated: [{ type: String }],
+  NumbOfPost: { type: Number },
 });
 
 module.exports = mongoose.model("Users", UserSchema);

@@ -6,7 +6,9 @@ import Loading from "../Loading";
 import { useSelector } from "react-redux";
 
 const Posts = () => {
-  const { loading, error, data } = useQuery(getPostsDetail);
+  const { loading, error, data } = useQuery(getPostsDetail, {
+    fetchPolicy: "cache-and-network",
+  });
   const userprofile = useSelector((state) => state.UserProfile.user);
   if (loading)
     return (

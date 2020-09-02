@@ -19,6 +19,7 @@ const ProfilePage = () => {
   const { profiledetail } = useParams();
   const { loading, error, data } = useQuery(getUserProfile, {
     variables: { _id: location.state.id },
+    fetchPolicy: "cache-and-network",
   });
 
   return (
