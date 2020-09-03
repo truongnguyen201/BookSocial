@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import shareIcon from "../../../img/tag.svg";
 import isNotCommented from "../../../img/comment.svg";
 import avatarUserIcon from "../../../img/profile.svg";
@@ -12,6 +12,7 @@ import addPostComment from "../../Queries/addPostComment";
 import { useSelector } from "react-redux";
 import { UpVote, UnVote } from "../../Queries/Vote";
 import getVote from "../../Queries/getVote";
+import TextareaAutosize from "react-textarea-autosize";
 
 const BotttomPost = (props) => {
   const { postID, rateCount, IsVoted } = props;
@@ -20,7 +21,6 @@ const BotttomPost = (props) => {
   const [isVoted, setIsVoted] = useState(IsVoted);
   const [commentContent, setCommentContent] = useState("");
   const [RateCount, setRateCount] = useState(rateCount);
-  const commentRef = useRef();
 
   const userprofile = useSelector((state) => state.UserProfile.user);
 
@@ -46,8 +46,9 @@ const BotttomPost = (props) => {
 
   const addcomment = (e) => {
     if (e.key === "Enter") {
+      commentContent.trim();
       if (commentContent !== "") {
-        commentContent.trim();
+        e.preventDefault();
         addComment({
           variables: {
             content: commentContent,
@@ -56,7 +57,7 @@ const BotttomPost = (props) => {
           },
           refetchQueries: [{ query: getComment, variables: { id: postID } }],
         });
-        commentRef.current.value = "";
+        setCommentContent("");
       }
     }
   };
@@ -107,29 +108,12 @@ const BotttomPost = (props) => {
   }, [res, userprofile]);
 
   return (
-    <div className="BottomPost" style={{ padding: "10px 0px" }}>
-      <div
-        className="Actions"
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          paddingLeft: "5px",
-          alignItems: "center",
-          cursor: "pointer",
-        }}
-      >
-        <img
-          src={voteIcon}
-          height="20px"
-          width="20px"
-          alt="icon"
-          onClick={voteAction}
-        ></img>
+    <div className="BottomPost">
+      <div className="Actions">
+        <img src={voteIcon} alt="icon" onClick={voteAction}></img>
         <span>{RateCount}</span>
         <img
           src={commentIcon}
-          height="20px"
-          width="20px"
           alt="icon"
           onClick={() => {
             loadingComment();
@@ -154,25 +138,8 @@ const BotttomPost = (props) => {
             </div>
           ) : (
             <div>
-              <div
-                className="horizontal-line-bottom-post"
-                style={{
-                  width: "100%",
-                  borderBottom: "1px solid #d6d6d6",
-                  textAlign: "center",
-                  lineHeight: "0.3em",
-                  margin: "15px 0px",
-                }}
-              ></div>
-              <div
-                className="comment"
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "15px",
-                }}
-              >
+              <div className="horizontal-line-bottom-post"></div>
+              <div className="comment">
                 <div className="avatar" style={{ width: "8%" }}>
                   <img
                     src={avatarUserIcon}
@@ -182,33 +149,19 @@ const BotttomPost = (props) => {
                   ></img>
                 </div>
                 <div style={{ width: "92%" }}>
-                  <input
+                  <TextareaAutosize
                     type="text"
                     placeholder="Viet Binh Luan"
                     onChange={(e) => setCommentContent(e.target.value)}
                     onKeyDown={addcomment}
-                    ref={commentRef}
-                    style={{
-                      width: "80%",
-                      border: "1px solid #d6d6d6",
-                      padding: "8px 20px",
-                      borderRadius: "20px",
-                      outline: "none",
-                    }}
-                  ></input>
+                    minRows={1}
+                    value={commentContent}
+                    autoFocus
+                  />
                 </div>
               </div>
               {data?.post.comments.length > 0 && (
-                <div
-                  className="horizontal-line-bottom-post"
-                  style={{
-                    width: "100%",
-                    borderBottom: "1px solid #d6d6d6",
-                    textAlign: "center",
-                    lineHeight: "0.3em",
-                    margin: "15px 0px",
-                  }}
-                ></div>
+                <div className="horizontal-line-bottom-post"></div>
               )}
 
               {data?.post.comments.length > 0 &&

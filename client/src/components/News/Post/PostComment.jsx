@@ -1,14 +1,19 @@
-import React, { useState, useRef } from "react";
-import isNotCommented from "../../../img/comment.svg";
+import React, { useState } from "react";
 import avatarUserIcon from "../../../img/profile.svg";
-import isCommentedIcon from "../../../img/isCommented.svg";
 import unVotedIcon from "../../../img/star.svg";
 import votedIcon from "../../../img/vote.svg";
+import replyIcon from "../../../img/reply.svg";
+import menuaction from "../../../img/menupost.svg";
 import CommentPart from "./CommentPart";
 import { useMutation } from "@apollo/client";
 import addReplyComment from "../../Queries/addReplyComment";
 import { useSelector } from "react-redux";
 import getComment from "../../Queries/getComment";
+import TextareaAutosize from "react-textarea-autosize";
+import {
+  deletePostComment,
+  deleteReplyComment,
+} from "../../Queries/deleteComment";
 
 const PostComment = (props) => {
   const {
@@ -24,7 +29,6 @@ const PostComment = (props) => {
   const [replyVoted, setReplyVoted] = useState(false);
   const [replyCommented, setReplyCommented] = useState(false);
   const [replyContent, setReplyContent] = useState("");
-  const replyCommentRef = useRef();
 
   const userprofile = useSelector((state) => state.UserProfile.user);
   const [addreplycomment] = useMutation(addReplyComment);
@@ -33,6 +37,7 @@ const PostComment = (props) => {
     if (e.key === "Enter") {
       if (replyContent !== "") {
         replyContent.trim();
+        e.preventDefault();
         addreplycomment({
           variables: {
             userID: userprofile._id,
@@ -49,24 +54,49 @@ const PostComment = (props) => {
             },
           ],
         });
-        replyCommentRef.current.value = "";
+        setReplyContent("");
       }
     }
   };
 
-  let commentIcon;
   let voteIcon;
   let replyVoteIcon;
-  let replyCommentIcon;
-  isCommented
-    ? (commentIcon = isCommentedIcon)
-    : (commentIcon = isNotCommented);
+
   isVoted ? (voteIcon = votedIcon) : (voteIcon = unVotedIcon);
 
-  replyCommented
-    ? (replyCommentIcon = isCommentedIcon)
-    : (replyCommentIcon = isNotCommented);
   replyVoted ? (replyVoteIcon = votedIcon) : (replyVoteIcon = unVotedIcon);
+  const replycommentaction = (reply) => {
+    return () => {
+      console.log(reply.userID.username);
+      setReplyContent("");
+      setReplyCommented(!replyCommented);
+    };
+  };
+
+  const [deletepostcomment] = useMutation(deletePostComment);
+  const [deletereplycomment] = useMutation(deleteReplyComment);
+
+  const DeletePostComment = () => {
+    deletepostcomment({
+      variables: {
+        postID: postID,
+        postCommentID: commentID,
+      },
+      refetchQueries: [{ query: getComment, variables: { id: postID } }],
+    });
+  };
+  const DeleteRelpyComment = (reply) => {
+    return () => {
+      deletereplycomment({
+        variables: {
+          postID: postID,
+          postCommentID: commentID,
+          replyCommentID: reply._id,
+        },
+        refetchQueries: [{ query: getComment, variables: { id: postID } }],
+      });
+    };
+  };
 
   return (
     <div className="PostComment">
@@ -75,31 +105,23 @@ const PostComment = (props) => {
         time={commentTime}
         content={commentContent}
       >
-        <div
-          className="commentpart-action"
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            paddingLeft: "5px",
-            alignItems: "center",
-            cursor: "pointer",
-            fontWeight: "bold",
-          }}
-        >
-          <img
-            src={voteIcon}
-            height="15px"
-            width="15px"
-            alt="icon"
-            onClick={() => setIsVoted(!isVoted)}
-          ></img>
-          <img
-            src={commentIcon}
-            height="15px"
-            width="15px"
-            alt="icon"
+        <div className="commentpart-action">
+          <div className="voteicon" onClick={() => setIsVoted(!isVoted)}>
+            <img src={voteIcon} height="15px" width="15px" alt="icon"></img>
+            <span>1</span>
+          </div>
+          <div
+            className="replyicon"
             onClick={() => setIsCommented(!isCommented)}
-          ></img>
+          >
+            <img src={replyIcon} height="15px" width="15px" alt="icon"></img>
+            <span>Reply</span>
+          </div>
+          {commentUserID._id === userprofile._id && (
+            <div className="menu-action" onClick={DeletePostComment}>
+              <img src={menuaction} height="15px" width="15px" alt="icon"></img>
+            </div>
+          )}
         </div>
         {replyComments.length > 0 &&
           replyComments.map((replycomment, index) => (
@@ -109,44 +131,49 @@ const PostComment = (props) => {
               time={replycomment.time}
               user={replycomment.userID}
             >
-              <div
-                className="commentpart-action"
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  paddingLeft: "5px",
-                  alignItems: "center",
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                }}
-              >
-                <img
-                  src={replyVoteIcon}
-                  height="15px"
-                  width="15px"
-                  alt="icon"
+              <div className="commentpart-action">
+                <div
+                  className="voteicon"
                   onClick={() => setReplyVoted(!replyVoted)}
-                ></img>
-                <img
-                  src={replyCommentIcon}
-                  height="15px"
-                  width="15px"
-                  alt="icon"
-                  onClick={() => setReplyCommented(!replyCommented)}
-                ></img>
+                >
+                  <img
+                    src={replyVoteIcon}
+                    height="15px"
+                    width="15px"
+                    alt="icon"
+                  ></img>
+                  <span>1</span>
+                </div>
+                <div
+                  className="replyicon"
+                  onClick={replycommentaction(replycomment)}
+                >
+                  <img
+                    src={replyIcon}
+                    height="15px"
+                    width="15px"
+                    alt="icon"
+                  ></img>
+                  <span>Reply</span>
+                </div>
+                {replycomment.userID._id === userprofile._id && (
+                  <div
+                    className="menu-action"
+                    onClick={DeleteRelpyComment(replycomment)}
+                  >
+                    <img
+                      src={menuaction}
+                      height="15px"
+                      width="15px"
+                      alt="icon"
+                    ></img>
+                  </div>
+                )}
               </div>
             </CommentPart>
           ))}
         {(isCommented || replyCommented) && (
-          <div
-            className="replycomment"
-            style={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "15px",
-            }}
-          >
+          <div className="replycomment">
             <div className="avatar" style={{ width: "8%" }}>
               <img
                 src={avatarUserIcon}
@@ -156,20 +183,15 @@ const PostComment = (props) => {
               ></img>
             </div>
             <div style={{ width: "92%" }}>
-              <input
+              <TextareaAutosize
                 type="text"
-                placeholder="Viết Phản Hồi"
+                placeholder="Viet Binh Luan"
                 onChange={(e) => setReplyContent(e.target.value)}
                 onKeyDown={AddReplyComment}
-                ref={replyCommentRef}
-                style={{
-                  width: "80%",
-                  border: "1px solid #d6d6d6",
-                  padding: "5px 20px",
-                  borderRadius: "20px",
-                  outline: "none",
-                }}
-              ></input>
+                minRows={1}
+                value={replyContent}
+                autoFocus
+              />
             </div>
           </div>
         )}

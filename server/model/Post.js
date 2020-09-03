@@ -17,11 +17,21 @@ const postSchema = new schema({
   userVoted: [{ type: String }],
   comments: [
     {
+      rateCount: Number,
+      userVoted: [{ type: String }],
       PostCommentID: String,
       content: String,
       userID: String,
       time: String,
-      replyComments: [{ content: String, userID: String, time: String }],
+      replyComments: [
+        {
+          content: String,
+          userID: String,
+          time: String,
+          rateCount: Number,
+          userVoted: [{ type: String }],
+        },
+      ],
     },
   ],
 });

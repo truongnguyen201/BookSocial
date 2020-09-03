@@ -10,13 +10,10 @@ const {
   PostType,
   SignUpType,
   LoginType,
-  FollowType,
-  UnFollowType,
+
+  actionType,
   PostCommentType,
   ReplyCommentType,
-  deletePost,
-  upVote,
-  unVote,
 } = require("../Query/Query");
 
 dotenv.config();
@@ -149,7 +146,7 @@ const Mutation = new GraphQLObjectType({
     },
 
     follow: {
-      type: FollowType,
+      type: actionType,
       args: {
         userID: { type: new GraphQLNonNull(GraphQLID) },
         followingid: { type: new GraphQLNonNull(GraphQLID) },
@@ -172,7 +169,7 @@ const Mutation = new GraphQLObjectType({
     },
 
     unfollow: {
-      type: UnFollowType,
+      type: actionType,
       args: {
         userID: { type: new GraphQLNonNull(GraphQLID) },
         unFollowid: { type: new GraphQLNonNull(GraphQLID) },
@@ -210,6 +207,8 @@ const Mutation = new GraphQLObjectType({
           {
             $push: {
               comments: {
+                rateCount: 0,
+                userVoted: [],
                 content: args.content,
                 userID: args.userID,
                 time: date,
@@ -241,6 +240,8 @@ const Mutation = new GraphQLObjectType({
           {
             $push: {
               "comments.$.replyComments": {
+                rateCount: 0,
+                userVoted: [],
                 content: args.content,
                 PostCommentID: args.postCommentID,
                 userID: args.userID,
@@ -254,8 +255,56 @@ const Mutation = new GraphQLObjectType({
         return { state: "success" };
       },
     },
+    deletePostComment: {
+      type: actionType,
+      args: {
+        postID: { type: new GraphQLNonNull(GraphQLID) },
+        postCommentID: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        const post = await Post.updateOne(
+          { _id: args.postID },
+          {
+            $pull: {
+              comments: {
+                _id: args.postCommentID,
+              },
+            },
+          }
+        );
+
+        if (post.nModified !== 1) return new GraphQLError("somthing wrong");
+        return { state: "delete success" };
+      },
+    },
+    deleteReplyComment: {
+      type: actionType,
+      args: {
+        postID: { type: new GraphQLNonNull(GraphQLID) },
+        postCommentID: { type: new GraphQLNonNull(GraphQLID) },
+        replyCommentID: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        const post = await Post.updateOne(
+          {
+            _id: args.postID,
+            "comments._id": args.postCommentID,
+          },
+          {
+            $pull: {
+              "comments.$.replyComments": {
+                _id: args.replyCommentID,
+              },
+            },
+          }
+        );
+
+        if (post.nModified !== 1) return new GraphQLError("somthing wrong");
+        return { state: "delete success" };
+      },
+    },
     deletePost: {
-      type: deletePost,
+      type: actionType,
       args: {
         userID: { type: new GraphQLNonNull(GraphQLID) },
         postID: { type: new GraphQLNonNull(GraphQLID) },
@@ -278,7 +327,7 @@ const Mutation = new GraphQLObjectType({
     },
 
     upVote: {
-      type: upVote,
+      type: actionType,
       args: {
         userID: { type: new GraphQLNonNull(GraphQLID) },
         postID: { type: new GraphQLNonNull(GraphQLID) },
@@ -304,7 +353,7 @@ const Mutation = new GraphQLObjectType({
     },
 
     unVote: {
-      type: unVote,
+      type: actionType,
       args: {
         postID: { type: new GraphQLNonNull(GraphQLID) },
         userID: { type: new GraphQLNonNull(GraphQLID) },
@@ -328,6 +377,91 @@ const Mutation = new GraphQLObjectType({
         return { state: "success" };
       },
     },
+    upVotePostComment: {
+      type: actionType,
+      args: {
+        postCommentID: { type: new GraphQLNonNull(GraphQLID) },
+        userID: { type: new GraphQLNonNull(GraphQLID) },
+        postID: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        const post = await Post.updateOne(
+          {
+            _id: args.postID,
+            "comments._id": args.postCommentID,
+          },
+          {
+            $inc: {
+              "comments.$.rateCount": 1,
+            },
+            $push: {
+              "comments.$.userVoted": args.userID,
+            },
+          }
+        );
+
+        if (post.nModified !== 1) return new GraphQLError("something wrong");
+        return { state: "success" };
+      },
+    },
+    unVotePostComment: {
+      type: actionType,
+      args: {
+        postCommentID: { type: new GraphQLNonNull(GraphQLID) },
+        userID: { type: new GraphQLNonNull(GraphQLID) },
+        postID: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        const post = await Post.updateOne(
+          {
+            _id: args.postID,
+            "comments._id": args.postCommentID,
+          },
+          {
+            $inc: {
+              "comments.$.rateCount": -1,
+            },
+            $pull: {
+              "comments.$.userVoted": args.userID,
+            },
+          }
+        );
+
+        if (post.nModified !== 1) return new GraphQLError("something wrong");
+        return { state: "success" };
+      },
+    },
+    // upVoteReplyComment: {
+    //   type: actionType,
+    //   args: {
+    //     postCommentID: { type: new GraphQLNonNull(GraphQLID) },
+    //     userID: { type: new GraphQLNonNull(GraphQLID) },
+    //     postID: { type: new GraphQLNonNull(GraphQLID) },
+    //     replyCommentID: { type: new GraphQLNonNull(GraphQLID) },
+    //   },
+    //   async resolve(parent, args) {
+    //     const post = await Post.findByIdAndUpdate(
+    //       {
+    //         _id: args.postID,
+    //         "comments._id": args.postCommentID,
+    //         "comments.replyComments._id": args.replyCommentID,
+    //       },
+    //       {
+    //         $inc: {
+    //           "comments.$.replyComments.rateCount": 1,
+    //         },
+
+    //         // $push: {
+    //         //   userVoted: args.userID,
+    //         // },
+    //       }
+    //     );
+
+    //     console.log(post);
+    //     if (post.nModified !== 1) return new GraphQLError("something wrong");
+    //     return { state: "success" };
+    //   },
+    // },
   },
 });
 

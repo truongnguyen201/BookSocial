@@ -54,7 +54,7 @@ const SignUpType = new GraphQLObjectType({
 });
 
 const ReplyCommentType = new GraphQLObjectType({
-  name: "ReplyCommentType",
+  name: "ReplyComment",
   fields: () => ({
     _id: { type: GraphQLID },
     content: { type: GraphQLString },
@@ -72,7 +72,7 @@ const ReplyCommentType = new GraphQLObjectType({
 });
 
 const PostCommentType = new GraphQLObjectType({
-  name: "PostCommentType",
+  name: "PostComment",
   fields: () => ({
     _id: { type: GraphQLID },
     content: { type: GraphQLString },
@@ -214,36 +214,8 @@ const UserType = new GraphQLObjectType({
   }),
 });
 
-const FollowType = new GraphQLObjectType({
-  name: "FollowType",
-  fields: () => ({
-    state: { type: GraphQLString },
-  }),
-});
-
-const UnFollowType = new GraphQLObjectType({
-  name: "UnFollowType",
-  fields: () => ({
-    state: { type: GraphQLString },
-  }),
-});
-
-const deletePost = new GraphQLObjectType({
-  name: "DeletePost",
-  fields: () => ({
-    state: { type: GraphQLString },
-  }),
-});
-
-const upVote = new GraphQLObjectType({
-  name: "UpVote",
-  fields: () => ({
-    state: { type: GraphQLString },
-  }),
-});
-
-const unVote = new GraphQLObjectType({
-  name: "UnVote",
+const actionType = new GraphQLObjectType({
+  name: "ActionType",
   fields: () => ({
     state: { type: GraphQLString },
   }),
@@ -307,11 +279,7 @@ module.exports = {
   SignUpType,
   LoginType,
   UserType,
-  FollowType,
-  UnFollowType,
+  actionType,
   PostCommentType,
   ReplyCommentType,
-  deletePost,
-  upVote,
-  unVote,
 };

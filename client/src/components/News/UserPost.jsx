@@ -42,27 +42,16 @@ const UserPost = () => {
   return (
     <div className="UserPost">
       <div className="MainUserPost" onClick={toggleModal}>
-        <div
-          className="top-userpost"
-          style={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
+        <div className="top-userpost">
           <div className="Avatar">
             <img src={AvatarIcon} alt="icon" height="30px" width="30px"></img>
           </div>
-          <div className="UserName" style={{ marginLeft: "20px" }}>
+          <div className="UserName" style={{ marginLeft: "10px" }}>
             {userProfile.user.username}
           </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          Let us know your reviewer about some books
+        <div className="bottom-userpost">
+          Let's review or ask some questions
         </div>
       </div>
       <Modal isOpen={modal} toggle={toggleModal}>

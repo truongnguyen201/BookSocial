@@ -6,7 +6,11 @@ const MiddlePost = (props) => {
 
   return (
     <div className="MiddlePost" style={{ padding: "10px", display: "flex" }}>
-      <div>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam rerum
+      vitae facere consectetur nulla? Neque vel voluptatem esse expedita beatae
+      qui nemo blanditiis aspernatur, quos quibusdam, cum nulla similique
+      necessitatibus? {author}, {Review}, {Recommendation}, {genre}, {Booktitle}
+      {/* <div>
         <img src={exampleBook} width="100px" height="auto" alt="imgBook"></img>
       </div>
       <div className="Info" style={{ marginLeft: "20px" }}>
@@ -26,7 +30,7 @@ const MiddlePost = (props) => {
         <div>
           <strong> Recommendation</strong>: {Recommendation}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

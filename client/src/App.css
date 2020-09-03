@@ -255,47 +255,6 @@
   background-color: #d3d8e6;
 }
 
-.ProfileMainPage .Posts {
-  z-index: 0;
-  width: 95%;
-}
-
-.ProfileMainPage .Posts .Post {
-  margin-top: 20px;
-  background-color: white;
-  border-radius: 10px;
-  padding: 10px 20px;
-}
-
-.ProfileMainPage .Posts .Loading {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.ProfileMainPage .Posts .top-post {
-  display: flex;
-}
-
-.ProfileMainPage .Posts .top-post .user-info {
-  display: flex;
-  width: 95%;
-}
-
-.ProfileMainPage .Posts .top-post .menu-post {
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
-  padding: 5px;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.ProfileMainPage .Posts .top-post .menu-post:hover {
-  background-color: #dedede;
-}
-
 .ProfileMainPage .ProfilePageNavBar {
   background-color: white;
   width: 95%;
@@ -343,6 +302,13 @@
   height: 3px;
   position: absolute;
   bottom: 0;
+}
+.ProfileMainPage .ProfileMain .Posts .Post {
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 20px;
+  width: 95%;
 }
 
 .MainInfo {
@@ -445,11 +411,33 @@
   display: flex;
   flex-direction: column;
   margin-top: 20px;
-  height: 70px;
+  height: 90px;
   border-radius: 10px;
   padding: 10px 20px;
+  user-select: none;
+  cursor: pointer;
 }
 
+.News .UserPost .MainUserPost .top-userpost {
+  display: flex;
+  align-items: center;
+}
+.News .UserPost .MainUserPost .top-userpost .UserName {
+  font-size: 16px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 400;
+  color: #a8a8a8;
+}
+
+.News .UserPost .MainUserPost .bottom-userpost {
+  display: flex;
+  padding: 5px 0px;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0.2px;
+  color: #7a7a7a;
+}
+/* Post */
 .News .Posts .Post {
   margin-top: 20px;
   background-color: white;
@@ -457,23 +445,23 @@
   padding: 10px 20px;
 }
 
-.News .Posts .Loading {
+.Posts .Loading {
   margin-top: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.News .Posts .top-post {
+.Posts .top-post {
   display: flex;
 }
 
-.News .Posts .top-post .user-info {
+.Posts .top-post .user-info {
   display: flex;
   width: 95%;
 }
 
-.News .Posts .top-post .menu-post {
+.Posts .top-post .menu-post {
   cursor: pointer;
   width: 30px;
   height: 30px;
@@ -484,8 +472,146 @@
   align-items: center;
 }
 
-.News .Posts .top-post .menu-post:hover {
+.Posts .top-post .menu-post:hover {
   background-color: #dedede;
 }
+
+.Posts .BottomPost {
+  padding: 10px 0px;
+}
+
+.Posts .BottomPost .Actions {
+  display: flex;
+  flex-direction: row;
+  padding-left: 5px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.Posts .BottomPost .Actions > img {
+  height: 20px;
+  width: 20px;
+}
+
+.Posts .BottomPost .horizontal-line-bottom-post {
+  width: 100%;
+  border-bottom: 1px solid #d6d6d6;
+  text-align: center;
+  line-height: 0.3em;
+  margin: 15px 0px;
+}
+.Posts .BottomPost .comment {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+.Posts .BottomPost .comment > div > textarea {
+  width: 80%;
+  border: 1px solid #d6d6d6;
+  padding: 8px 20px;
+  border-radius: 20px;
+  outline: none;
+  overflow: hidden;
+  resize: none;
+}
+.Posts .BottomPost .PostComment .CommentPart {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 0px;
+}
+.Posts .BottomPost .PostComment .CommentPart .commentpart-action {
+  display: flex;
+  flex-direction: row;
+  padding-left: 15px;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 100;
+  width: 110px;
+  min-width: 110px;
+  justify-content: space-between;
+  padding-top: 5px;
+  font-size: 13px;
+  color: #8b8b8b;
+}
+.Posts .BottomPost .PostComment .CommentPart .commentpart-action .replyicon {
+  display: flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.Posts
+  .BottomPost
+  .PostComment
+  .CommentPart
+  .commentpart-action
+  .replyicon:hover {
+  background-color: #f0efef;
+}
+.Posts
+  .BottomPost
+  .PostComment
+  .CommentPart
+  .commentpart-action
+  .replyicon
+  > span {
+  margin-left: 2px;
+  user-select: none;
+}
+.Posts .BottomPost .PostComment .CommentPart .commentpart-action .voteicon {
+  display: flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.Posts
+  .BottomPost
+  .PostComment
+  .CommentPart
+  .commentpart-action
+  .voteicon:hover {
+  background-color: #f0efef;
+}
+.Posts .BottomPost .PostComment .CommentPart .commentpart-action .menu-action {
+  margin-left: 5px;
+  user-select: none;
+  padding: 1px 3px;
+  border-radius: 10px;
+}
+
+.Posts
+  .BottomPost
+  .PostComment
+  .CommentPart
+  .commentpart-action
+  .menu-action:hover {
+  background-color: #f0efef;
+}
+.Posts
+  .BottomPost
+  .PostComment
+  .CommentPart
+  .commentpart-action
+  .voteicon
+  > span {
+  margin-left: 2px;
+  user-select: none;
+}
+.Posts .BottomPost .PostComment .CommentPart .replycomment {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+.Posts .BottomPost .PostComment .CommentPart .replycomment > div > textarea {
+  width: 80%;
+  border: 1px solid #d6d6d6;
+  padding: 8px 20px;
+  border-radius: 20px;
+  outline: none;
+  overflow: hidden;
+  resize: none;
+}
+/* Post */
 
 /* .News */

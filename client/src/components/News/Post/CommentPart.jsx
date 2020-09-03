@@ -5,15 +5,9 @@ import moment from "moment";
 
 const CommentPart = (props) => {
   const { user, time, content, children } = props;
+
   return (
-    <div
-      className="CommentPart"
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        padding: "10px 0px",
-      }}
-    >
+    <div className="CommentPart">
       <div className="avatar" style={{ width: "8%" }}>
         <img src={avatarUserIcon} alt="icon" height="30px" width="30px"></img>
       </div>
@@ -44,6 +38,7 @@ const CommentPart = (props) => {
               style={{
                 fontSize: "14px",
                 fontFamily: "'Merriweather Sans', sans-serif",
+                paddingLeft: "5px",
               }}
             >
               {moment(time, "LLLL").startOf("minute").fromNow()}

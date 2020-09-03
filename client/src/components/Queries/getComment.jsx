@@ -13,6 +13,7 @@ const getComment = gql`
         content
         time
         replyComments {
+          _id
           userID {
             _id
             username
